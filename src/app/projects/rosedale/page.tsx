@@ -57,7 +57,7 @@ export default function RosedaleDetailsPage() {
       <section className="inner-page-section" style={{ paddingTop: "40px" }}>
         <div className="container">
           {/* Main Visual Showcase */}
-          <div style={{ position: "relative", height: "450px", borderRadius: "12px", overflow: "hidden", marginBottom: "40px", boxShadow: "var(--shadow-md)" }}>
+          <div className="project-showcase-banner">
             <Image
               src="/rosedale_housing.png"
               alt="Dbali Rosedale Housing Render"
@@ -65,10 +65,10 @@ export default function RosedaleDetailsPage() {
               priority
               style={{ objectFit: "cover" }}
             />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px 30px", background: "linear-gradient(to top, rgba(30, 34, 41, 0.9) 20%, rgba(30, 34, 41, 0))" }}>
+            <div className="project-showcase-info">
               <div className="project-badge project-badge-teal" style={{ marginBottom: "12px", display: "inline-block" }}>Active Gated Society</div>
-              <h2 style={{ color: "white", fontSize: "32px", margin: "0 0 8px 0", fontFamily: "var(--font-poppins)" }}>Dbali Rosedale Housing</h2>
-              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px", margin: 0 }}>Residential Plots & Custom Villas • Kashipur, US Nagar</p>
+              <h2>Dbali Rosedale Housing</h2>
+              <p>Residential Plots & Custom Villas • Kashipur, US Nagar</p>
             </div>
           </div>
 
@@ -95,7 +95,7 @@ export default function RosedaleDetailsPage() {
               </div>
 
               <h3 style={{ marginTop: "40px" }}>Amenities & Perks</h3>
-              <ul className="timeline-list" style={{ marginTop: "20px" }}>
+              <ul className="amenities-list" style={{ marginTop: "20px" }}>
                 <li>
                   <strong>Immediate Construction:</strong> All plots are ready for excavation. Structural builders are available on consult.
                 </li>
@@ -113,7 +113,7 @@ export default function RosedaleDetailsPage() {
               <h3 style={{ fontSize: "18px", marginBottom: "16px", color: "var(--color-primary-dark)" }}>Quick Overview</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "30px" }}>
                 {specs.map((spec, idx) => (
-                  <div key={idx} style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid rgba(30, 34, 41, 0.06)", paddingBottom: "10px" }}>
+                  <div key={idx} className="project-stat-row">
                     <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>{spec.label}</span>
                     <strong style={{ fontSize: "13px", color: "var(--color-primary-dark)", textAlign: "right" }}>{spec.value}</strong>
                   </div>

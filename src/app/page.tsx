@@ -106,7 +106,7 @@ export default function Home() {
                 A Vision of Excellence in Everything We Do
               </h2>
               <p className="hero-description" style={{ marginBottom: "20px" }}>
-                Founded in 2007 as a proprietorship by a visionary team, **Dbali Real Estate** (officially registered as **D. Bali Infrastructures & Developers Ltd.**) has grown into a prominent property developer in Udham Singh Nagar, Uttarakhand.
+                Founded in 2007 as a proprietorship by a visionary team, <strong>Dbali Real Estate</strong> (officially registered as <strong>D. Bali Infrastructures & Developers Ltd.</strong>) has grown into a prominent property developer in Udham Singh Nagar, Uttarakhand.
               </p>
               <p className="hero-description" style={{ marginBottom: "30px" }}>
                 We believe a home is a lifetime investment. That's why our professional team maintains an undeviating focus on delivering complete customer satisfaction. From detail-oriented vendor surveillance to strict project management, we monitor every single activity to ensure top-grade quality.

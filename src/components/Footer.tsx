@@ -134,6 +134,17 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>© {currentYear} D. Bali Infrastructures & Developers Ltd. All Rights Reserved.</p>
+          <p className="developed-by" style={{ margin: "0" }}>
+            Developed by{" "}
+            <a
+              href="https://preettech.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="developed-by-link"
+            >
+              Preet Tech
+            </a>
+          </p>
           <div className="footer-bottom-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Use</a>
