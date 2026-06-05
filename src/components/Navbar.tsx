@@ -52,8 +52,8 @@ export default function Navbar() {
             <Image
               src="/logo.jpg"
               alt="Dbali Logo"
-              width={150}
-              height={46}
+              width={145}
+              height={44}
               style={{ objectFit: "contain" }}
               className="logo-img"
               priority
