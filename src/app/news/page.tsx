@@ -1,13 +1,16 @@
-"use client";
+// Removed "use client" so page can be a Server Component
 
 // E:\Dbali website\src\app\news/page.tsx
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import { getNewsArticles } from "@/lib/hygraph";
 
-export default function LatestNewsPage() {
-  const articles = [
+export default async function LatestNewsPage() {
+  const dynamicArticles = await getNewsArticles();
+
+  const fallbackArticles = [
     {
       title: "Rosedale Housing Society Gated Development Complete",
       date: "May 24, 2026",
@@ -30,6 +33,7 @@ export default function LatestNewsPage() {
       slug: "twelve-hundred-families-milestone",
     },
   ];
+  const articles = dynamicArticles && dynamicArticles.length > 0 ? dynamicArticles : fallbackArticles;
 
   return (
     <>
@@ -42,11 +46,11 @@ export default function LatestNewsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="news-grid">
-            {articles.map((item, idx) => (
+            {articles.map((item: any, idx: number) => (
               <div className="news-card" key={idx}>
                 <div className="news-card-img-wrapper">
                   <Image
-                    src={item.image}
+                    src={item.featuredImage?.url || item.image || "/logo.jpg"}
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -56,8 +60,8 @@ export default function LatestNewsPage() {
                 <div className="news-card-content">
                   <div className="news-card-date">{item.date}</div>
                   <h4 className="news-card-title">{item.title}</h4>
-                  <p className="news-card-desc">{item.desc}</p>
-                  <a href="#" className="news-card-link" onClick={(e) => e.preventDefault()}>
+                  <p className="news-card-desc">{item.excerpt || item.desc}</p>
+                  <a href={`/news/${item.slug}`} className="news-card-link">
                     Read More 
                     <svg fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="14" height="14">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

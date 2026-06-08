@@ -2,21 +2,27 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getPageContent } from "@/lib/hygraph";
 
-export default function VisionMissionPage() {
+export default async function VisionMissionPage() {
+  const pageData = await getPageContent("vision-mission");
   return (
     <>
       <Navbar />
       <PageHeader
-        title="Vision & Mission"
-        subtitle="Our aspirational outlook and daily commitments guiding our architectural decisions."
+        title={pageData?.title || "Vision & Mission"}
+        subtitle={pageData?.subtitle || "Our aspirational outlook and daily commitments guiding our architectural decisions."}
         breadcrumbs={[{ label: "Company" }, { label: "Vision & Mission" }]}
       />
       <section className="inner-page-section">
         <div className="container">
           <div className="content-grid-2">
             <div className="content-body">
-              <h2>Our Vision</h2>
+              {pageData?.content?.html ? (
+                <div dangerouslySetInnerHTML={{ __html: pageData.content.html }} className="prose" />
+              ) : (
+                <>
+                  <h2>Our Vision</h2>
               <p style={{ fontSize: "18px", color: "var(--color-primary-dark)", lineHeight: "1.8", fontWeight: "500" }}>
                 "To be the most trusted and quality-driven real estate development company in Uttarakhand, recognized for architectural perfection, timely handovers, and sustainable community living."
               </p>
@@ -39,6 +45,8 @@ export default function VisionMissionPage() {
                   <strong>Value Multiplication:</strong> Developing properties in strategic growth corridors with highway connection benefits, guaranteeing a solid return on investment for our clients.
                 </li>
               </ul>
+                </>
+              )}
             </div>
 
             <div className="sidebar-box">

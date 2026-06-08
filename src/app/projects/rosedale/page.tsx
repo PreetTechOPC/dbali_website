@@ -11,7 +11,7 @@ import ContactForm from "@/components/ContactForm";
 export default function RosedaleDetailsPage() {
   const specs = [
     { label: "Property Options", value: "Residential Plots & Custom Villas" },
-    { label: "Price Range", value: "Pricing On Request" },
+
     { label: "Possession Status", value: "Immediate (Ready for Construction)" },
     { label: "Internal Roads", value: "30 & 40 Feet Wide Layouts" },
     { label: "Registry Option", value: "Immediate Registry & Mutation" },

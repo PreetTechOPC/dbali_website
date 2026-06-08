@@ -3,9 +3,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import { getVideos } from "@/lib/hygraph";
 
-export default function VideoGalleryPage() {
-  const videos = [
+export default async function VideoGalleryPage() {
+  const dynamicVideos = await getVideos();
+  const fallbackVideos = [
     {
       title: "Dbali Palm Groove Site Walkthrough",
       desc: "A detailed guided tour of our completed 2 BHK ready-to-move villas in Kashipur.",
@@ -26,6 +28,16 @@ export default function VideoGalleryPage() {
     },
   ];
 
+  const videos = dynamicVideos && dynamicVideos.length > 0 
+    ? dynamicVideos.map((v: any) => ({
+        title: v.title,
+        desc: v.description,
+        category: v.category,
+        image: v.thumbnail?.url || "/logo.jpg",
+        videoUrl: v.videoUrl
+      }))
+    : fallbackVideos;
+
   return (
     <>
       <Navbar />
@@ -37,7 +49,7 @@ export default function VideoGalleryPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="gallery-grid">
-            {videos.map((vid, idx) => (
+            {videos.map((vid: any, idx: number) => (
               <div className="gallery-card" key={idx} style={{ height: "300px" }}>
                 <Image
                   src={vid.image}

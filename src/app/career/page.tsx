@@ -2,9 +2,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getCareers } from "@/lib/hygraph";
 
-export default function CareerPage() {
-  const openings = [
+export default async function CareerPage() {
+  const dynamicOpenings = await getCareers();
+  const fallbackOpenings = [
     {
       role: "Site Engineer (Civil)",
       dept: "Construction Division",
@@ -24,6 +26,15 @@ export default function CareerPage() {
       loc: "Kashipur Head Office",
     },
   ];
+
+  const openings = dynamicOpenings && dynamicOpenings.length > 0 
+    ? dynamicOpenings.map((c: any) => ({
+        role: c.jobTitle,
+        dept: c.department,
+        exp: "Experience not specified", // Could add to schema later
+        loc: c.location,
+      }))
+    : fallbackOpenings;
 
   return (
     <>
@@ -58,7 +69,7 @@ export default function CareerPage() {
 
               <h2>Current Openings</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "20px", margin: "24px 0" }}>
-                {openings.map((job, idx) => (
+                {openings.map((job: any, idx: number) => (
                   <div key={idx} style={{ padding: "24px", border: "1px solid rgba(30, 34, 41, 0.06)", borderRadius: "6px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
                     <div>
                       <h4 style={{ fontSize: "18px", color: "var(--color-primary-dark)", margin: "0 0 4px 0" }}>{job.role}</h4>

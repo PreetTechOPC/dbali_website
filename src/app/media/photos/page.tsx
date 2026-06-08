@@ -3,9 +3,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import { getPhotos } from "@/lib/hygraph";
 
-export default function PhotoGalleryPage() {
-  const photos = [
+export default async function PhotoGalleryPage() {
+  const dynamicPhotos = await getPhotos();
+  const fallbackPhotos = [
     {
       title: "Palm Groove Villa Frontage",
       category: "Exteriors",
@@ -38,6 +40,17 @@ export default function PhotoGalleryPage() {
     },
   ];
 
+  const photos = dynamicPhotos && dynamicPhotos.length > 0 
+    ? dynamicPhotos.map((p: any) => ({
+        title: p.title,
+        category: p.category,
+        image: p.image?.url || "/logo.jpg"
+      }))
+    : fallbackPhotos;
+
+  // Extract unique categories for the filter bar
+  const uniqueCategories = ["All Photos", ...Array.from(new Set(photos.map((p: any) => p.category)))];
+
   return (
     <>
       <Navbar />
@@ -49,7 +62,7 @@ export default function PhotoGalleryPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="gallery-filter-bar">
-            {["All Photos", "Exteriors", "Interiors", "Amenities", "Site Updates"].map((filter, idx) => (
+            {uniqueCategories.map((filter: any, idx: number) => (
               <button
                 key={idx}
                 className={`btn ${idx === 0 ? "btn-orange" : "btn-outline"}`}
@@ -61,7 +74,7 @@ export default function PhotoGalleryPage() {
           </div>
 
           <div className="gallery-grid">
-            {photos.map((photo, idx) => (
+            {photos.map((photo: any, idx: number) => (
               <div className="gallery-card" key={idx}>
                 <Image
                   src={photo.image}

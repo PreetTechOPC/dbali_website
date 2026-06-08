@@ -11,7 +11,7 @@ import ContactForm from "@/components/ContactForm";
 export default function PalmGrooveDetailsPage() {
   const specs = [
     { label: "Villa Sizes", value: "2 BHK Independent Duplex" },
-    { label: "Price Range", value: "Starting at ₹21.5 Lakhs" },
+
     { label: "Possession Status", value: "Ready to Move" },
     { label: "Registry Option", value: "Immediate Registry & Mutation" },
     { label: "Location", value: "Ramnagar Road Corridor, Kashipur" },
@@ -68,7 +68,7 @@ export default function PalmGrooveDetailsPage() {
             <div className="project-showcase-info">
               <div className="project-badge project-badge-orange" style={{ marginBottom: "12px", display: "inline-block" }}>Ready to Move</div>
               <h2>Dbali Palm Groove</h2>
-              <p>Starting at ₹21.5 Lakhs • Ramnagar Road Corridor, Kashipur</p>
+              <p>Ramnagar Road Corridor, Kashipur</p>
             </div>
           </div>
 

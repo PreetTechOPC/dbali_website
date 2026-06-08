@@ -11,7 +11,7 @@ import ContactForm from "@/components/ContactForm";
 export default function WhiteHouseDetailsPage() {
   const specs = [
     { label: "Floor Sizes", value: "2 & 3 BHK Builder Floors" },
-    { label: "Price Range", value: "₹48.50 – 65.00 Lakhs" },
+
     { label: "Possession Status", value: "Under Construction (Phase I Delivery Soon)" },
     { label: "Location", value: "Ramnagar Road (NH 121), Kashipur" },
     { label: "Features", value: "Elevator access & reserved stilt parking" },
@@ -68,7 +68,7 @@ export default function WhiteHouseDetailsPage() {
             <div className="project-showcase-info">
               <div className="project-badge project-badge-blue" style={{ marginBottom: "12px", display: "inline-block" }}>Selling Fast</div>
               <h2>Dbali White House</h2>
-              <p>₹48.50 – 65.00 Lakhs • Directly on Ramnagar Road (NH 121)</p>
+              <p>Directly on Ramnagar Road (NH 121)</p>
             </div>
           </div>
 

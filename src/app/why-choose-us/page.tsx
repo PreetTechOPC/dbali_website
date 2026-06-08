@@ -2,8 +2,10 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getPageContent } from "@/lib/hygraph";
 
-export default function WhyChooseUsPage() {
+export default async function WhyChooseUsPage() {
+  const pageData = await getPageContent("why-choose-us");
   const reasons = [
     {
       title: "Quality Construction Materials",
@@ -41,13 +43,16 @@ export default function WhyChooseUsPage() {
     <>
       <Navbar />
       <PageHeader
-        title="Why Choose Dbali"
-        subtitle="Six reasons why over 1,200 homebuyers in Udham Singh Nagar trust us with their lifetime savings."
+        title={pageData?.title || "Why Choose Dbali"}
+        subtitle={pageData?.subtitle || "Six reasons why over 1,200 homebuyers in Udham Singh Nagar trust us with their lifetime savings."}
         breadcrumbs={[{ label: "Company" }, { label: "Why Choose Us" }]}
       />
       <section className="inner-page-section">
         <div className="container">
-          <div className="projects-grid" style={{ gap: "30px" }}>
+          {pageData?.content?.html ? (
+            <div dangerouslySetInnerHTML={{ __html: pageData.content.html }} className="prose" />
+          ) : (
+            <div className="projects-grid" style={{ gap: "30px" }}>
             {reasons.map((item, idx) => (
               <div
                 key={idx}
@@ -68,7 +73,8 @@ export default function WhyChooseUsPage() {
                 </p>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
       <Footer />

@@ -2,8 +2,10 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getPageContent } from "@/lib/hygraph";
 
-export default function OurJourneyPage() {
+export default async function OurJourneyPage() {
+  const pageData = await getPageContent("our-journey");
   const milestones = [
     {
       year: "2007",
@@ -41,13 +43,16 @@ export default function OurJourneyPage() {
     <>
       <Navbar />
       <PageHeader
-        title="Our Journey"
-        subtitle="Timeline of milestones, housing achievements, and consistent regional growth since 2007."
+        title={pageData?.title || "Our Journey"}
+        subtitle={pageData?.subtitle || "Timeline of milestones, housing achievements, and consistent regional growth since 2007."}
         breadcrumbs={[{ label: "Company" }, { label: "Our Journey" }]}
       />
       <section className="inner-page-section">
         <div className="container">
-          <div className="timeline-list">
+          {pageData?.content?.html ? (
+            <div dangerouslySetInnerHTML={{ __html: pageData.content.html }} className="prose" />
+          ) : (
+            <div className="timeline-list">
             {milestones.map((item, idx) => (
               <div className="timeline-item" key={idx}>
                 <div className="timeline-dot" />
@@ -59,6 +64,7 @@ export default function OurJourneyPage() {
               </div>
             ))}
           </div>
+          )}
         </div>
       </section>
       <Footer />

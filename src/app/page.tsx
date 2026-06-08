@@ -6,12 +6,15 @@ import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import HeroSlider from "@/components/HeroSlider";
 import Image from "next/image";
+import { getHeroSlides, getHomeSection, getProjects } from "@/lib/hygraph";
 
-export default function Home() {
-  const projectsData = [
+export default async function Home() {
+  const slides = await getHeroSlides();
+  const featuredSection = await getHomeSection("featured-projects");
+  const dynamicProjects = await getProjects();
+  const fallbackProjects = [
     {
       title: "Dbali Palm Groove",
-      price: "Starting at ₹21.5 Lakhs",
       location: "Kashipur, US Nagar",
       image: "/palm_groove_villa.png",
       badgeText: "Best Seller",
@@ -19,14 +22,12 @@ export default function Home() {
       description: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
       specs: [
         { label: "Configuration", value: "2 BHK Villas" },
-        { label: "Price Range", value: "₹21.5L+" },
         { label: "Possession", value: "Ready to Move" },
       ],
       detailsLink: "/projects/palm-groove",
     },
     {
       title: "Dbali White House",
-      price: "₹48.50 – 65.00 Lakhs",
       location: "Ramnagar Road / NH 121, Kashipur",
       image: "/white_house.png",
       badgeText: "Premium Luxury",
@@ -34,14 +35,12 @@ export default function Home() {
       description: "Sleek and spacious 2 & 3 BHK builder floors located directly on Ramnagar Road (NH 121). Offers elevator access, reserved car parking, and modern architectural details.",
       specs: [
         { label: "Configuration", value: "2 & 3 BHK Floors" },
-        { label: "Price Range", value: "₹48.5L - 65L" },
         { label: "Possession", value: "Under Const." },
       ],
       detailsLink: "/projects/white-house",
     },
     {
       title: "Dbali Rosedale Housing",
-      price: "Price on Request",
       location: "Kashipur, US Nagar",
       image: "/rosedale_housing.png",
       badgeText: "Gated Community",
@@ -56,12 +55,25 @@ export default function Home() {
     },
   ];
 
+  const projectsData = dynamicProjects && dynamicProjects.length > 0 
+    ? dynamicProjects.map((p: any) => ({
+        title: p.title,
+        location: p.location,
+        image: p.featuredImage?.url || "/placeholder-image.jpg",
+        badgeText: p.projectStatus,
+        badgeColorClass: "teal", // could map from status
+        description: p.shortDescription,
+        specs: [],
+        detailsLink: `/projects/${p.slug}`,
+      }))
+    : fallbackProjects;
+
   return (
     <>
       <Navbar />
 
       {/* Hero Section */}
-      <HeroSlider />
+      <HeroSlider slides={slides || undefined} />
 
       {/* Stats Cards Section */}
       <StatsSection />
@@ -70,19 +82,18 @@ export default function Home() {
       <section className="section" id="projects" style={{ backgroundColor: "#f9f8f4" }}>
         <div className="container">
           <div className="section-header animate-fade-in-up">
-            <span className="section-subtitle">Featured Projects</span>
-            <h2 className="section-title">Delivering Lifestyle & Security</h2>
+            <span className="section-subtitle">{featuredSection?.subtitle || "Featured Projects"}</span>
+            <h2 className="section-title">{featuredSection?.title || "Delivering Lifestyle & Security"}</h2>
             <p className="section-desc">
-              Explore our current residential landmarks in Kashipur. From pocket-friendly luxury villas to premium builder floors on major highways, we construct with a vision of perfection.
+              {featuredSection?.description || "Explore our current residential landmarks in Kashipur. From pocket-friendly luxury villas to premium builder floors on major highways, we construct with a vision of perfection."}
             </p>
           </div>
 
           <div className="projects-grid">
-            {projectsData.map((project, idx) => (
+            {projectsData.map((project: any, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={project.title}
-                price={project.price}
                 location={project.location}
                 image={project.image}
                 badgeText={project.badgeText}

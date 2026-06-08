@@ -2,21 +2,27 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getPageContent } from "@/lib/hygraph";
 
-export default function CompanyProfilePage() {
+export default async function CompanyProfilePage() {
+  const pageData = await getPageContent("company-profile");
   return (
     <>
       <Navbar />
       <PageHeader
-        title="Company Profile"
-        subtitle="Corporate structure, registration details, core capabilities, and market footprint."
+        title={pageData?.title || "Company Profile"}
+        subtitle={pageData?.subtitle || "Corporate structure, registration details, core capabilities, and market footprint."}
         breadcrumbs={[{ label: "Company" }, { label: "Profile" }]}
       />
       <section className="inner-page-section">
         <div className="container">
           <div className="content-grid-2">
             <div className="content-body">
-              <h2>Corporate Overview</h2>
+              {pageData?.content?.html ? (
+                <div dangerouslySetInnerHTML={{ __html: pageData.content.html }} className="prose" />
+              ) : (
+                <>
+                  <h2>Corporate Overview</h2>
               <p>
                 D. Bali Infrastructures & Developers Ltd. is a registered public limited company headquartered in Kashipur, Uttarakhand. Established in 2007 as a proprietorship firm, it transitioned into a corporate entity to support large-scale residential housing projects and infrastructure contracts in the Udham Singh Nagar district.
               </p>
@@ -68,6 +74,8 @@ export default function CompanyProfilePage() {
               <p>
                 Dbali has positioned itself as the go-to brand for buyers seeking highway accessibility (NH 121 / Ramnagar Road connectivity) combined with serene, well-secured community parks. We continue to hold land reserves in strategic growth corridors of Kashipur to support future phases of real estate development.
               </p>
+                </>
+              )}
             </div>
 
             <div className="sidebar-box">

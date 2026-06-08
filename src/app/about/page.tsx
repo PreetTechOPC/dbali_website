@@ -2,21 +2,27 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getPageContent } from "@/lib/hygraph";
 
-export default function AboutUsPage() {
+export default async function AboutUsPage() {
+  const pageData = await getPageContent("about-us");
   return (
     <>
       <Navbar />
       <PageHeader
-        title="About Us"
-        subtitle="A legacy of trust, architectural excellence, and customer-first values in Uttarakhand."
+        title={pageData?.title || "About Us"}
+        subtitle={pageData?.subtitle || "A legacy of trust, architectural excellence, and customer-first values in Uttarakhand."}
         breadcrumbs={[{ label: "Company" }, { label: "About Us" }]}
       />
       <section className="inner-page-section">
         <div className="container">
           <div className="content-grid-2">
             <div className="content-body">
-              <h2>Building Landmarks Since 2007</h2>
+              {pageData?.content?.html ? (
+                <div dangerouslySetInnerHTML={{ __html: pageData.content.html }} className="prose" />
+              ) : (
+                <>
+                  <h2>Building Landmarks Since 2007</h2>
               <p>
                 Dbali Real Estate, officially incorporated as <strong>D. Bali Infrastructures & Developers Ltd.</strong>, began its journey in 2007 in Kashipur, Uttarakhand. Founded on the principles of engineering perfection and absolute client transparency, we have grown from a local residential builder into one of the region's most prominent real estate developers.
               </p>
@@ -44,6 +50,8 @@ export default function AboutUsPage() {
               <p>
                 Every brick we lay is guided by the philosophy of <em>Panchatatvena Saargarbhitah</em>—integrating the five elements of nature to bring harmony, balance, and ventilation into modern residential spaces. Our design process ensures maximum natural light, structural durability, and optimal space utilization.
               </p>
+                </>
+              )}
             </div>
 
             <div className="sidebar-box">

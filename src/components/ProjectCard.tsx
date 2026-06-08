@@ -9,7 +9,6 @@ interface Spec {
 
 interface ProjectCardProps {
   title: string;
-  price: string;
   location: string;
   image: string;
   specs: Spec[];
@@ -21,7 +20,6 @@ interface ProjectCardProps {
 
 export default function ProjectCard({
   title,
-  price,
   location,
   image,
   specs,
@@ -53,7 +51,6 @@ export default function ProjectCard({
         />
       </div>
       <div className="project-content">
-        <div className="project-price-tag">{price}</div>
         <h3 className="project-title">{title}</h3>
         <p className="project-desc">{description}</p>
         

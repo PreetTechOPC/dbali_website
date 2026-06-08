@@ -8,7 +8,6 @@ export default function ExistingProjectsPage() {
   const existingProjects = [
     {
       title: "Dbali Rosedale Housing",
-      price: "Pricing On Request",
       location: "Kashipur, US Nagar",
       image: "/rosedale_housing.png",
       badgeText: "Active Gated Society",
@@ -22,7 +21,6 @@ export default function ExistingProjectsPage() {
     },
     {
       title: "Dbali Palm Groove",
-      price: "Starting at ₹21.5 Lakhs",
       location: "Kashipur, US Nagar",
       image: "/palm_groove_villa.png",
       badgeText: "Ready to Move",
@@ -30,7 +28,6 @@ export default function ExistingProjectsPage() {
       description: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
       specs: [
         { label: "Configuration", value: "2 BHK Villas" },
-        { label: "Price Range", value: "₹21.5L+" },
         { label: "Possession", value: "Ready to Move" },
       ],
     },
@@ -51,7 +48,6 @@ export default function ExistingProjectsPage() {
               <ProjectCard
                 key={idx}
                 title={project.title}
-                price={project.price}
                 location={project.location}
                 image={project.image}
                 badgeText={project.badgeText}

@@ -2,9 +2,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getAwards } from "@/lib/hygraph";
+import Image from "next/image";
 
-export default function AwardsPage() {
-  const achievements = [
+export default async function AwardsPage() {
+  const dynamicAwards = await getAwards();
+  const fallbackAchievements = [
     {
       title: "19+ Years of Real Estate Excellence",
       organization: "Kashipur Property Council",
@@ -31,6 +34,16 @@ export default function AwardsPage() {
     },
   ];
 
+  const achievements = dynamicAwards && dynamicAwards.length > 0 
+    ? dynamicAwards.map((a: any) => ({
+        title: a.title,
+        organization: "Dbali Infrastructure", // Schema doesn't have org, providing fallback
+        year: a.year,
+        desc: a.description,
+        image: a.image?.url || null
+      }))
+    : fallbackAchievements;
+
   return (
     <>
       <Navbar />
@@ -42,7 +55,7 @@ export default function AwardsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid" style={{ gap: "30px" }}>
-            {achievements.map((item, idx) => (
+            {achievements.map((item: any, idx: number) => (
               <div
                 key={idx}
                 className="stat-card"
@@ -63,6 +76,11 @@ export default function AwardsPage() {
                 <p style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: "1.6", margin: "0 0 12px 0" }}>
                   {item.desc}
                 </p>
+                {item.image && (
+                  <div style={{ position: "relative", width: "100%", height: "150px", marginBottom: "12px", borderRadius: "4px", overflow: "hidden" }}>
+                    <Image src={item.image} alt={item.title} fill style={{ objectFit: "cover" }} />
+                  </div>
+                )}
                 <div style={{ fontSize: "13px", fontWeight: "600", color: "var(--color-primary-dark)", borderTop: "1px solid rgba(30, 34, 41, 0.05)", paddingTop: "10px" }}>
                   Issued by: {item.organization}
                 </div>

@@ -58,9 +58,6 @@ export default function PreviousProjectsPage() {
                   />
                 </div>
                 <div className="project-content">
-                  <div className="project-price-tag" style={{ color: "#5e6675", fontSize: "14px" }}>
-                    Delivered & Occupied
-                  </div>
                   <h3 className="project-title">{project.name}</h3>
                   <p className="project-desc">{project.desc}</p>
                   <div className="project-specs" style={{ marginTop: "16px", borderTop: "1px solid rgba(30, 34, 41, 0.05)", paddingTop: "12px" }}>

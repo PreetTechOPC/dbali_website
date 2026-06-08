@@ -8,7 +8,6 @@ export default function LatestProjectsPage() {
   const latestProjects = [
     {
       title: "Dbali Palm Groove",
-      price: "Starting at ₹21.5 Lakhs",
       location: "Kashipur, US Nagar",
       image: "/palm_groove_villa.png",
       badgeText: "Recently Completed",
@@ -16,13 +15,11 @@ export default function LatestProjectsPage() {
       description: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
       specs: [
         { label: "Configuration", value: "2 BHK Villas" },
-        { label: "Price Range", value: "₹21.5L+" },
         { label: "Possession", value: "Ready to Move" },
       ],
     },
     {
       title: "Dbali White House",
-      price: "₹48.50 – 65.00 Lakhs",
       location: "Ramnagar Road / NH 121, Kashipur",
       image: "/white_house.png",
       badgeText: "Selling Fast",
@@ -30,7 +27,6 @@ export default function LatestProjectsPage() {
       description: "Sleek and spacious 2 & 3 BHK builder floors located directly on Ramnagar Road (NH 121). Offers elevator access, reserved car parking, and modern architectural details.",
       specs: [
         { label: "Configuration", value: "2 & 3 BHK Floors" },
-        { label: "Price Range", value: "₹48.5L - 65L" },
         { label: "Possession", value: "Under Const." },
       ],
     },
@@ -51,7 +47,6 @@ export default function LatestProjectsPage() {
               <ProjectCard
                 key={idx}
                 title={project.title}
-                price={project.price}
                 location={project.location}
                 image={project.image}
                 badgeText={project.badgeText}

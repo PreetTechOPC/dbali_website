@@ -8,38 +8,39 @@ interface Slide {
   image: string;
   badge: string;
   title: string;
-  price: string;
-  desc: string;
+  description: string;
   link: string;
 }
+interface HeroSliderProps {
+  slides?: Slide[];
+}
 
-export default function HeroSlider() {
-  const slides: Slide[] = [
+export default function HeroSlider({ slides: propSlides }: HeroSliderProps) {
+  const fallbackSlides: Slide[] = [
     {
       image: "/palm_groove_villa.png",
       badge: "Flagship Residential Villas",
       title: "Dbali Palm Groove",
-      price: "Starting at ₹21.5 Lakhs",
-      desc: "Exquisite 2 BHK luxury villas in Kashipur featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
+      description: "Exquisite 2 BHK luxury villas in Kashipur featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
       link: "#projects",
     },
     {
       image: "/white_house.png",
       badge: "Highway-Connect Builder Floors",
       title: "Dbali White House",
-      price: "₹48.50 – 65.00 Lakhs",
-      desc: "Sleek and spacious 2 & 3 BHK builder floors located directly on Ramnagar Road (NH 121). Offers elevator access, reserved car parking, and modern architectural details.",
+      description: "Sleek and spacious 2 & 3 BHK builder floors located directly on Ramnagar Road (NH 121). Offers elevator access, reserved car parking, and modern architectural details.",
       link: "#projects",
     },
     {
       image: "/rosedale_housing.png",
       badge: "Premium Gated Society",
       title: "Dbali Rosedale Housing",
-      price: "Pricing On Request",
-      desc: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",
+      description: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",
       link: "#projects",
     },
   ];
+
+  const slides = propSlides && propSlides.length > 0 ? propSlides : fallbackSlides;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -82,9 +83,9 @@ export default function HeroSlider() {
             className={`slide-bg-item ${idx === activeIndex ? "active" : ""}`}
           >
             <div className="slide-bg-overlay" />
-            <Image
-              src={slide.image}
-              alt={slide.title}
+              <Image
+                src={(slide.image as any)?.url || slide.image || "/logo.jpg"}
+                alt={slide.title}
               fill
               priority={idx === 0}
               className="slide-bg-image"
@@ -109,11 +110,8 @@ export default function HeroSlider() {
               <h1 className="hero-title slide-up-anim delay-200">
                 {slide.title}
               </h1>
-              <div className="slide-price slide-up-anim delay-300">
-                {slide.price}
-              </div>
               <p className="hero-description slide-up-anim delay-400">
-                {slide.desc}
+                {slide.description}
               </p>
               <div className="hero-actions slide-up-anim delay-500">
                 <a href="#contact" className="btn btn-orange">

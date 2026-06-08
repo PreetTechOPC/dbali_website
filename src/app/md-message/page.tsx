@@ -2,21 +2,27 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
+import { getPageContent } from "@/lib/hygraph";
 
-export default function MdMessagePage() {
+export default async function MdMessagePage() {
+  const pageData = await getPageContent("md-message");
   return (
     <>
       <Navbar />
       <PageHeader
-        title="Managing Director's Message"
-        subtitle="Our purpose, client commitments, and strategic blueprint for sustainable growth."
+        title={pageData?.title || "Managing Director's Message"}
+        subtitle={pageData?.subtitle || "Our purpose, client commitments, and strategic blueprint for sustainable growth."}
         breadcrumbs={[{ label: "Company" }, { label: "MD Message" }]}
       />
       <section className="inner-page-section">
         <div className="container">
           <div className="content-grid-2">
             <div className="content-body">
-              <h2>Dear Friends and Homebuyers,</h2>
+              {pageData?.content?.html ? (
+                <div dangerouslySetInnerHTML={{ __html: pageData.content.html }} className="prose" />
+              ) : (
+                <>
+                  <h2>Dear Friends and Homebuyers,</h2>
               <p>
                 When we founded Dbali in 2007, our goal was simple yet profound: to build residential properties in Kashipur that stand the test of time, both structurally and financially. For us, real estate development is not just about concrete and brick; it is about delivering the keys to a lifetime of happiness, security, and pride.
               </p>
@@ -39,6 +45,8 @@ export default function MdMessagePage() {
                 <strong style={{ display: "block", fontSize: "18px", color: "var(--color-primary-dark)" }}>Managing Director</strong>
                 <span style={{ color: "var(--color-orange)", fontWeight: "600" }}>D. Bali Infrastructures & Developers Ltd.</span>
               </div>
+                </>
+              )}
             </div>
 
             <div className="sidebar-box">
