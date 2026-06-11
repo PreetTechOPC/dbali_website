@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import Link from "next/link";
 import { getNewsArticles } from "@/lib/hygraph";
 
 export default async function LatestNewsPage() {
@@ -61,12 +62,12 @@ export default async function LatestNewsPage() {
                   <div className="news-card-date">{item.date}</div>
                   <h4 className="news-card-title">{item.title}</h4>
                   <p className="news-card-desc">{item.excerpt || item.desc}</p>
-                  <a href={`/news/${item.slug}`} className="news-card-link">
+                  <Link href={`/news/${item.slug}`} className="news-card-link">
                     Read More 
                     <svg fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="14" height="14">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}

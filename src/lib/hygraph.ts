@@ -134,6 +134,7 @@ export async function getProjects() {
         projectStatus
         location
         shortDescription
+        projectCategory
         featuredImage {
           url
         }
@@ -148,18 +149,16 @@ export async function getProject(slug: string) {
     query GetProject($slug: String!) {
       project(where: { slug: $slug }) {
         title
+        slug
         projectStatus
         location
         shortDescription
-        content {
-          html
-        }
-        featuredImage {
-          url
-        }
-        gallery {
-          url
-        }
+        featuredImage { url }
+        overview { html }
+        technicalSpecifications { html }
+        amenities { html }
+        quickOverview { html }
+        content { html }
       }
     }
   `, { slug });

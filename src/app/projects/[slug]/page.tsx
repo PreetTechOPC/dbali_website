@@ -42,11 +42,43 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
           <div className="content-grid-2">
             <div className="content-body">
-              <h2>About {project.title}</h2>
-              <div 
-                className="rich-text-content"
-                dangerouslySetInnerHTML={{ __html: project.content?.html || project.shortDescription }}
-              />
+              {project.overview?.html ? (
+                <>
+                  <h2>Project Overview</h2>
+                  <div 
+                    className="rich-text-content"
+                    dangerouslySetInnerHTML={{ __html: project.overview.html }}
+                  />
+                </>
+              ) : (
+                <>
+                  <h2>About {project.title}</h2>
+                  <div 
+                    className="rich-text-content"
+                    dangerouslySetInnerHTML={{ __html: project.content?.html || project.shortDescription }}
+                  />
+                </>
+              )}
+
+              {project.technicalSpecifications?.html && (
+                <div style={{ marginTop: "3rem" }}>
+                  <h2>Technical Specifications</h2>
+                  <div 
+                    className="rich-text-content"
+                    dangerouslySetInnerHTML={{ __html: project.technicalSpecifications.html }}
+                  />
+                </div>
+              )}
+
+              {project.amenities?.html && (
+                <div style={{ marginTop: "3rem" }}>
+                  <h2>Amenities</h2>
+                  <div 
+                    className="rich-text-content"
+                    dangerouslySetInnerHTML={{ __html: project.amenities.html }}
+                  />
+                </div>
+              )}
             </div>
             
             <div className="sidebar-box">
@@ -59,6 +91,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                   <strong>Status:</strong> {project.projectStatus}
                 </li>
               </ul>
+
+              {project.quickOverview?.html && (
+                <div style={{ marginTop: "2rem", paddingTop: "1rem", borderTop: "2px solid rgba(0,0,0,0.05)" }}>
+                  <h4 style={{ marginBottom: "1rem" }}>Quick Overview</h4>
+                  <div 
+                    className="rich-text-content"
+                    style={{ fontSize: "0.95rem", color: "var(--text-muted)" }}
+                    dangerouslySetInnerHTML={{ __html: project.quickOverview.html }}
+                  />
+                </div>
+              )}
               <a href="#contact" className="btn btn-orange" style={{ width: "100%", marginTop: "20px", textAlign: "center" }}>
                 Enquire Now
               </a>
@@ -69,7 +112,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div style={{ marginTop: "4rem" }}>
               <h2>Project Gallery</h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginTop: "20px" }}>
-                {project.gallery.map((img: any, idx: number) => (
+                {project.gallery.map((img: { url: string }, idx: number) => (
                   <div key={idx} style={{ position: "relative", height: "250px", borderRadius: "8px", overflow: "hidden" }}>
                     <Image src={img.url} alt={`${project.title} gallery ${idx + 1}`} fill style={{ objectFit: "cover" }} />
                   </div>

@@ -3,8 +3,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import { getProjects } from "@/lib/hygraph";
 
-export default function PreviousProjectsPage() {
+export default async function PreviousProjectsPage() {
+  const dynamicProjects = await getProjects();
+  
   const completedProjects = [
     {
       name: "Dbali Green Meadows",
@@ -32,6 +35,22 @@ export default function PreviousProjectsPage() {
     },
   ];
 
+  // Filter dynamic projects by projectCategory === "PreviousProjects"
+  const fetchedPreviousProjects = dynamicProjects?.filter(
+    (p: any) => p.projectCategory === "PreviousProjects"
+  ) || [];
+
+  const projectsData = fetchedPreviousProjects.length > 0
+    ? fetchedPreviousProjects.map((p: any) => ({
+        name: p.title,
+        location: p.location,
+        year: p.projectStatus || "Completed",
+        units: p.shortDescription || "Residential Project",
+        desc: p.overview?.html ? p.overview.html.replace(/<[^>]*>?/gm, '').substring(0, 150) + "..." : p.shortDescription,
+        image: p.featuredImage?.url || "/placeholder-image.jpg",
+      }))
+    : completedProjects;
+
   return (
     <>
       <Navbar />
@@ -43,11 +62,11 @@ export default function PreviousProjectsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid">
-            {completedProjects.map((project, idx) => (
+            {projectsData.map((project: any, idx: number) => (
               <div className="project-card" key={idx} style={{ opacity: 0.9 }}>
                 <div className="project-image-wrapper">
                   <span className="project-badge project-badge-teal" style={{ background: "#5e6675" }}>
-                    Completed {project.year}
+                    {project.year.includes("Completed") ? project.year : `Completed ${project.year}`}
                   </span>
                   <Image
                     src={project.image}
@@ -65,10 +84,12 @@ export default function PreviousProjectsPage() {
                       <span className="spec-label">Location</span>
                       <span className="spec-val">{project.location}</span>
                     </div>
-                    <div className="spec-item">
-                      <span className="spec-label">Scope</span>
-                      <span className="spec-val">{project.units}</span>
-                    </div>
+                    {project.units && (
+                      <div className="spec-item">
+                        <span className="spec-label">Scope</span>
+                        <span className="spec-val">{project.units}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

@@ -3,34 +3,23 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import ProjectCard from "@/components/ProjectCard";
+import { getProjects } from "@/lib/hygraph";
 
-export default function LatestProjectsPage() {
-  const latestProjects = [
-    {
-      title: "Dbali Palm Groove",
-      location: "Kashipur, US Nagar",
-      image: "/palm_groove_villa.png",
-      badgeText: "Recently Completed",
-      badgeColorClass: "orange",
-      description: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
-      specs: [
-        { label: "Configuration", value: "2 BHK Villas" },
-        { label: "Possession", value: "Ready to Move" },
-      ],
-    },
-    {
-      title: "Dbali White House",
-      location: "Ramnagar Road / NH 121, Kashipur",
-      image: "/white_house.png",
-      badgeText: "Selling Fast",
-      badgeColorClass: "blue",
-      description: "Sleek and spacious 2 & 3 BHK builder floors located directly on Ramnagar Road (NH 121). Offers elevator access, reserved car parking, and modern architectural details.",
-      specs: [
-        { label: "Configuration", value: "2 & 3 BHK Floors" },
-        { label: "Possession", value: "Under Const." },
-      ],
-    },
-  ];
+export default async function LatestProjectsPage() {
+  // Fetch all projects from Hygraph
+  const projects = await getProjects();
+
+  // Transform Hygraph data to match ProjectCard props
+  const latestProjects = projects.map((p: any) => ({
+    title: p.title,
+    location: p.location,
+    image: p.featuredImage?.url || "/placeholder-image.jpg",
+    badgeText: p.projectStatus,
+    badgeColorClass: "teal", // default; adjust mapping if needed
+    description: p.shortDescription,
+    specs: [], // Add any spec mapping if your schema provides it
+    detailsLink: `/projects/${p.slug}`,
+  }));
 
   return (
     <>
@@ -43,7 +32,7 @@ export default function LatestProjectsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid">
-            {latestProjects.map((project, idx) => (
+            {latestProjects.map((project: any, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={project.title}
@@ -53,7 +42,7 @@ export default function LatestProjectsPage() {
                 badgeColorClass={project.badgeColorClass}
                 description={project.description}
                 specs={project.specs}
-                detailsLink={project.title.toLowerCase().includes("palm") ? "/projects/palm-groove" : "/projects/white-house"}
+                detailsLink={project.detailsLink}
               />
             ))}
           </div>

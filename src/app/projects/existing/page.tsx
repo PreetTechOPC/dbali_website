@@ -3,8 +3,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import ProjectCard from "@/components/ProjectCard";
+import { getProjects } from "@/lib/hygraph";
 
-export default function ExistingProjectsPage() {
+export default async function ExistingProjectsPage() {
+  const dynamicProjects = await getProjects();
+  
   const existingProjects = [
     {
       title: "Dbali Rosedale Housing",
@@ -18,6 +21,7 @@ export default function ExistingProjectsPage() {
         { label: "Road Width", value: "30 & 40 Feet" },
         { label: "Possession", value: "Immediate" },
       ],
+      detailsLink: "/projects/rosedale"
     },
     {
       title: "Dbali Palm Groove",
@@ -30,8 +34,27 @@ export default function ExistingProjectsPage() {
         { label: "Configuration", value: "2 BHK Villas" },
         { label: "Possession", value: "Ready to Move" },
       ],
+      detailsLink: "/projects/palm-groove"
     },
   ];
+
+  // Filter dynamic projects by projectCategory === "ExistingProjects"
+  const fetchedExistingProjects = dynamicProjects?.filter(
+    (p: any) => p.projectCategory === "ExistingProjects"
+  ) || [];
+
+  const projectsData = fetchedExistingProjects.length > 0
+    ? fetchedExistingProjects.map((p: any) => ({
+        title: p.title,
+        location: p.location,
+        image: p.featuredImage?.url || "/placeholder-image.jpg",
+        badgeText: p.projectStatus || "Existing",
+        badgeColorClass: "teal",
+        description: p.shortDescription,
+        specs: [],
+        detailsLink: `/projects/${p.slug}`,
+      }))
+    : existingProjects;
 
   return (
     <>
@@ -44,7 +67,7 @@ export default function ExistingProjectsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid">
-            {existingProjects.map((project, idx) => (
+            {projectsData.map((project: any, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={project.title}
@@ -54,7 +77,7 @@ export default function ExistingProjectsPage() {
                 badgeColorClass={project.badgeColorClass}
                 description={project.description}
                 specs={project.specs}
-                detailsLink={project.title.toLowerCase().includes("palm") ? "/projects/palm-groove" : "/projects/rosedale"}
+                detailsLink={project.detailsLink}
               />
             ))}
           </div>
