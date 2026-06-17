@@ -252,7 +252,7 @@ export default async function Home() {
                   </div>
                   <div className="contact-text">
                     <h4>Sales Helpline</h4>
-                    <p>+91 98765 01234, +91 5947 275000</p>
+                    <p>+91 90121 38044, +91 8077 634 229</p>
                   </div>
                 </div>
 
@@ -265,7 +265,7 @@ export default async function Home() {
                   </div>
                   <div className="contact-text">
                     <h4>Email Address</h4>
-                    <p>sales@dbali.in</p>
+                    <p>d.bali@dbali.in</p>
                   </div>
                 </div>
               </div>
