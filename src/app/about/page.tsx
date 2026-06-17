@@ -24,7 +24,7 @@ export default async function AboutUsPage() {
                 <>
                   <h2>Building Landmarks Since 2007</h2>
               <p>
-                Dbali Real Estate, officially incorporated as <strong>D. Bali Infrastructures & Developers Ltd.</strong>, began its journey in 2007 in Kashipur, Uttarakhand. Founded on the principles of engineering perfection and absolute client transparency, we have grown from a local residential builder into one of the region's most prominent real estate developers.
+                Dbali Real Estate, officially incorporated as <strong>D. Bali Infrastructures & Developers Ltd.</strong>, began its journey in 2007 in Kashipur, Uttarakhand. Founded on the principles of engineering perfection and absolute client transparency, we have grown from a local residential builder into one of the region&apos;s most prominent real estate developers.
               </p>
               <p>
                 We specialize in creating premium, pocket-friendly luxury villas, high-end builder floors, and master-planned gated societies. By monitoring every detail of our supply chain and implementing rigorous project controls, we have earned the trust of over 1,200 happy families.

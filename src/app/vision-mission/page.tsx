@@ -24,7 +24,7 @@ export default async function VisionMissionPage() {
                 <>
                   <h2>Our Vision</h2>
               <p style={{ fontSize: "18px", color: "var(--color-primary-dark)", lineHeight: "1.8", fontWeight: "500" }}>
-                "To be the most trusted and quality-driven real estate development company in Uttarakhand, recognized for architectural perfection, timely handovers, and sustainable community living."
+                &quot;To be the most trusted and quality-driven real estate development company in Uttarakhand, recognized for architectural perfection, timely handovers, and sustainable community living.&quot;
               </p>
               <p>
                 We look beyond simple sales transaction numbers. Our vision is to elevate the residential standard of Udham Singh Nagar, developing landmarks that appreciate in asset value and provide comfortable multigenerational living.
@@ -55,7 +55,7 @@ export default async function VisionMissionPage() {
                 पंचतत्वेन सारगर्भितः
               </p>
               <p style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: "1.6" }}>
-                "Enriched with the five elements of nature." We construct spaces that integrate earth, water, fire, air, and space to create harmonized and healthy environments.
+                &quot;Enriched with the five elements of nature.&quot; We construct spaces that integrate earth, water, fire, air, and space to create harmonized and healthy environments.
               </p>
             </div>
           </div>

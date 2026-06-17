@@ -10,7 +10,7 @@ export default async function LatestProjectsPage() {
   const projects = await getProjects();
 
   // Transform Hygraph data to match ProjectCard props
-  const latestProjects = projects.map((p: any) => ({
+  const latestProjects = projects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
     title: p.title,
     location: p.location,
     image: p.featuredImage?.url || "/placeholder-image.jpg",
@@ -32,7 +32,7 @@ export default async function LatestProjectsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid">
-            {latestProjects.map((project: any, idx: number) => (
+            {latestProjects.map((project: { title: string; location: string; image: string; badgeText: string; badgeColorClass: string; description: string; specs: { label: string; value: string }[]; detailsLink: string }, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={project.title}

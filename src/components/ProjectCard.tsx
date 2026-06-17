@@ -20,7 +20,6 @@ interface ProjectCardProps {
 
 export default function ProjectCard({
   title,
-  location,
   image,
   specs,
   badgeText,
@@ -65,7 +64,7 @@ export default function ProjectCard({
         
         <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
           {detailsLink && (
-            <Link href={detailsLink} className="btn btn-outline" style={{ flex: 1, textAlign: "center", fontSize: "13px", padding: "10px 0" }}>
+            <Link href={encodeURI(detailsLink)} className="btn btn-outline" style={{ flex: 1, textAlign: "center", fontSize: "13px", padding: "10px 0" }}>
               View Details
             </Link>
           )}

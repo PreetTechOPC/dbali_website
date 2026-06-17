@@ -47,7 +47,7 @@ export default async function LatestNewsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="news-grid">
-            {articles.map((item: any, idx: number) => (
+            {articles.map((item: { title: string; date: string; desc?: string; excerpt?: string; image?: string; featuredImage?: { url: string }; slug: string }, idx: number) => (
               <div className="news-card" key={idx}>
                 <div className="news-card-img-wrapper">
                   <Image

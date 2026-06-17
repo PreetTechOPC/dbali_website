@@ -28,7 +28,7 @@ export default async function CareerPage() {
   ];
 
   const openings = dynamicOpenings && dynamicOpenings.length > 0 
-    ? dynamicOpenings.map((c: any) => ({
+    ? dynamicOpenings.map((c: { jobTitle: string; department: string; location: string }) => ({
         role: c.jobTitle,
         dept: c.department,
         exp: "Experience not specified", // Could add to schema later
@@ -69,7 +69,7 @@ export default async function CareerPage() {
 
               <h2>Current Openings</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "20px", margin: "24px 0" }}>
-                {openings.map((job: any, idx: number) => (
+                {openings.map((job: { role: string; dept: string; exp: string; loc: string }, idx: number) => (
                   <div key={idx} style={{ padding: "24px", border: "1px solid rgba(30, 34, 41, 0.06)", borderRadius: "6px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
                     <div>
                       <h4 style={{ fontSize: "18px", color: "var(--color-primary-dark)", margin: "0 0 4px 0" }}>{job.role}</h4>
@@ -92,7 +92,7 @@ export default async function CareerPage() {
                 <strong style={{ display: "block", marginBottom: "4px" }}>Email your resume:</strong>
                 <a href="mailto:careers@dbali.in" style={{ color: "var(--color-orange)", fontWeight: "600" }}>careers@dbali.in</a>
                 <span style={{ display: "block", marginTop: "12px", fontSize: "12px", color: "var(--text-muted)" }}>
-                  Please mention the role in the email subject (e.g., "Application for Site Engineer").
+                  Please mention the role in the email subject (e.g., &quot;Application for Site Engineer&quot;).
                 </span>
               </div>
             </div>

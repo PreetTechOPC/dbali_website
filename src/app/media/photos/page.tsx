@@ -9,47 +9,110 @@ export default async function PhotoGalleryPage() {
   const dynamicPhotos = await getPhotos();
   const fallbackPhotos = [
     {
-      title: "Palm Groove Villa Frontage",
+      title: "White House Swimming Pool View",
+      category: "Amenities",
+      image: "/project_gallery_1.jpg",
+    },
+    {
+      title: "White House Phase III Offer",
+      category: "Project Updates",
+      image: "/project_gallery_2.jpg",
+    },
+    {
+      title: "White House Premium Residences",
       category: "Exteriors",
-      image: "/palm_groove_villa.png",
+      image: "/project_gallery_3.jpg",
     },
     {
-      title: "Modular Kitchen Setup",
-      category: "Interiors",
-      image: "/white_house.png",
-    },
-    {
-      title: "Rosedale Gated Entrance Layout",
-      category: "Amenities",
-      image: "/rosedale_housing.png",
-    },
-    {
-      title: "Living Room Concept Rendering",
-      category: "Interiors",
-      image: "/palm_groove_villa.png",
-    },
-    {
-      title: "Completed Landscaped Garden",
-      category: "Amenities",
-      image: "/rosedale_housing.png",
-    },
-    {
-      title: "White House Construction Progress",
+      title: "White House Aerial Overview",
       category: "Site Updates",
-      image: "/white_house.png",
+      image: "/project_gallery_4.jpg",
+    },
+    {
+      title: "White House Phase III Layout",
+      category: "Floor Plans",
+      image: "/project_gallery_5.jpg",
+    },
+    {
+      title: "White House Phase II Layout",
+      category: "Floor Plans",
+      image: "/project_gallery_6.jpg",
+    },
+    {
+      title: "White House Street View",
+      category: "Exteriors",
+      image: "/project_gallery_7.jpg",
+    },
+    {
+      title: "White House Main Entrance",
+      category: "Exteriors",
+      image: "/project_gallery_8.jpg",
+    },
+    {
+      title: "White House Residential Street",
+      category: "Exteriors",
+      image: "/project_gallery_9.jpg",
+    },
+    {
+      title: "White House Night View Render",
+      category: "Exteriors",
+      image: "/project_gallery_10.jpg",
+    },
+    {
+      title: "Palm Groove Main Entrance",
+      category: "Exteriors",
+      image: "/project_gallery_11.jpg",
+    },
+    {
+      title: "Rosedale Gated Community",
+      category: "Exteriors",
+      image: "/project_gallery_12.jpg",
+    },
+    {
+      title: "Apna Ghar Entrance Gate",
+      category: "Exteriors",
+      image: "/project_gallery_13.jpg",
+    },
+    {
+      title: "Independent House Construction",
+      category: "Site Updates",
+      image: "/project_gallery_14.jpg",
+    },
+    {
+      title: "Completed Row Houses",
+      category: "Exteriors",
+      image: "/project_gallery_15.jpg",
+    },
+    {
+      title: "Palm Groove Community Area",
+      category: "Amenities",
+      image: "/project_gallery_16.jpg",
+    },
+    {
+      title: "Project Aerial View",
+      category: "Site Updates",
+      image: "/project_gallery_17.jpg",
+    },
+    {
+      title: "Community Park & Amenities",
+      category: "Amenities",
+      image: "/project_gallery_18.jpg",
+    },
+    {
+      title: "Row Houses Panoramic View",
+      category: "Exteriors",
+      image: "/project_gallery_19.jpg",
     },
   ];
 
   const photos = dynamicPhotos && dynamicPhotos.length > 0 
-    ? dynamicPhotos.map((p: any) => ({
+    ? dynamicPhotos.map((p: { title: string; category: string; image?: { url: string } }) => ({
         title: p.title,
         category: p.category,
         image: p.image?.url || "/logo.jpg"
       }))
     : fallbackPhotos;
 
-  // Extract unique categories for the filter bar
-  const uniqueCategories = ["All Photos", ...Array.from(new Set(photos.map((p: any) => p.category)))];
 
   return (
     <>
@@ -61,20 +124,8 @@ export default async function PhotoGalleryPage() {
       />
       <section className="inner-page-section">
         <div className="container">
-          <div className="gallery-filter-bar">
-            {uniqueCategories.map((filter: any, idx: number) => (
-              <button
-                key={idx}
-                className={`btn ${idx === 0 ? "btn-orange" : "btn-outline"}`}
-                style={{ padding: "8px 18px", fontSize: "14px", borderRadius: "30px" }}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-
           <div className="gallery-grid">
-            {photos.map((photo: any, idx: number) => (
+            {photos.map((photo: { title: string; category: string; image: string }, idx: number) => (
               <div className="gallery-card" key={idx}>
                 <Image
                   src={photo.image}
@@ -83,10 +134,7 @@ export default async function PhotoGalleryPage() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="gallery-card-img"
                 />
-                <div className="gallery-card-overlay">
-                  <h4>{photo.title}</h4>
-                  <p>{photo.category}</p>
-                </div>
+
               </div>
             ))}
           </div>

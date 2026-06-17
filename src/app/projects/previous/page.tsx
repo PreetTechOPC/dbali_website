@@ -37,11 +37,11 @@ export default async function PreviousProjectsPage() {
 
   // Filter dynamic projects by projectCategory === "PreviousProjects"
   const fetchedPreviousProjects = dynamicProjects?.filter(
-    (p: any) => p.projectCategory === "PreviousProjects"
+    (p: { projectCategory: string }) => p.projectCategory === "PreviousProjects"
   ) || [];
 
   const projectsData = fetchedPreviousProjects.length > 0
-    ? fetchedPreviousProjects.map((p: any) => ({
+    ? fetchedPreviousProjects.map((p: { title: string; location: string; projectStatus: string; shortDescription: string; overview?: { html: string }; featuredImage?: { url: string } }) => ({
         name: p.title,
         location: p.location,
         year: p.projectStatus || "Completed",
@@ -62,7 +62,7 @@ export default async function PreviousProjectsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid">
-            {projectsData.map((project: any, idx: number) => (
+            {projectsData.map((project: { name: string; location: string; year: string; units: string; desc: string; image: string }, idx: number) => (
               <div className="project-card" key={idx} style={{ opacity: 0.9 }}>
                 <div className="project-image-wrapper">
                   <span className="project-badge project-badge-teal" style={{ background: "#5e6675" }}>

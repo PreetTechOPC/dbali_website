@@ -1,5 +1,6 @@
-const { Client, SimpleFieldType } = require('@hygraph/management-sdk');
-require('dotenv').config({ path: '.env.local' });
+import { Client, SimpleFieldType } from '@hygraph/management-sdk';
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 
 const managementEndpoint = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT;
 

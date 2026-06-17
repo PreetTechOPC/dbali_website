@@ -35,7 +35,7 @@ export default async function AwardsPage() {
   ];
 
   const achievements = dynamicAwards && dynamicAwards.length > 0 
-    ? dynamicAwards.map((a: any) => ({
+    ? dynamicAwards.map((a: { title: string; year: string; description: string; image?: { url: string } }) => ({
         title: a.title,
         organization: "Dbali Infrastructure", // Schema doesn't have org, providing fallback
         year: a.year,
@@ -55,7 +55,7 @@ export default async function AwardsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid" style={{ gap: "30px" }}>
-            {achievements.map((item: any, idx: number) => (
+            {achievements.map((item: { title: string; organization: string; year: string; desc: string; image?: string }, idx: number) => (
               <div
                 key={idx}
                 className="stat-card"

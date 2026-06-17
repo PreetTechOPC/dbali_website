@@ -56,7 +56,7 @@ export default async function Home() {
   ];
 
   const projectsData = dynamicProjects && dynamicProjects.length > 0 
-    ? dynamicProjects.map((p: any) => ({
+    ? dynamicProjects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
         title: p.title,
         location: p.location,
         image: p.featuredImage?.url || "/placeholder-image.jpg",
@@ -90,7 +90,7 @@ export default async function Home() {
           </div>
 
           <div className="projects-grid">
-            {projectsData.map((project: any, idx: number) => (
+            {projectsData.map((project: { title: string; location: string; image: string; badgeText: string; badgeColorClass: string; description: string; specs: { label: string; value: string }[]; detailsLink: string }, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={project.title}
@@ -103,6 +103,25 @@ export default async function Home() {
                 detailsLink={project.detailsLink}
               />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Promotional Banner Section */}
+      <section className="section" style={{ paddingTop: "20px", paddingBottom: "60px", backgroundColor: "#f9f8f4" }}>
+        <div className="container">
+          <div className="section-header animate-fade-in-up" style={{ textAlign: "center", marginBottom: "30px" }}>
+            <h2 className="section-title">White House Phase III</h2>
+          </div>
+          <div className="banner-container" style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
+            <Image
+              src="/white-house-banner.jpg"
+              alt="White House Phase III Promotional Banner"
+              width={1200}
+              height={675}
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
           </div>
         </div>
       </section>
@@ -120,7 +139,7 @@ export default async function Home() {
                 Founded in 2007 as a proprietorship by a visionary team, <strong>Dbali Real Estate</strong> (officially registered as <strong>D. Bali Infrastructures & Developers Ltd.</strong>) has grown into a prominent property developer in Udham Singh Nagar, Uttarakhand.
               </p>
               <p className="hero-description" style={{ marginBottom: "30px" }}>
-                We believe a home is a lifetime investment. That's why our professional team maintains an undeviating focus on delivering complete customer satisfaction. From detail-oriented vendor surveillance to strict project management, we monitor every single activity to ensure top-grade quality.
+                We believe a home is a lifetime investment. That&apos;s why our professional team maintains an undeviating focus on delivering complete customer satisfaction. From detail-oriented vendor surveillance to strict project management, we monitor every single activity to ensure top-grade quality.
               </p>
 
               <div className="about-features">
@@ -205,7 +224,7 @@ export default async function Home() {
             <div className="contact-info-card animate-fade-in-up">
               <div>
                 <span className="section-subtitle">Get in Touch</span>
-                <h2 className="section-title" style={{ marginBottom: "20px" }}>Let's Build Your Dream Home</h2>
+                <h2 className="section-title" style={{ marginBottom: "20px" }}>Let&apos;s Build Your Dream Home</h2>
                 <p className="hero-description" style={{ color: "var(--text-muted)" }}>
                   Have questions about Dbali Palm Groove, White House builder floors, or Rosedale Housing? Fill out the form, or reach out directly to our Kashipur office.
                 </p>

@@ -1,5 +1,6 @@
-const { Client } = require('@hygraph/management-sdk');
-require('dotenv').config({ path: '.env.local' });
+import { Client } from '@hygraph/management-sdk';
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 
 // We need to use the Management API endpoint for the SDK, not the Content API endpoint.
 // But earlier the user said NEXT_PUBLIC_HYGRAPH_ENDPOINT was the management endpoint before I changed it.

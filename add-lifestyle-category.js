@@ -1,5 +1,6 @@
-const { Client } = require('@hygraph/management-sdk');
-require('dotenv').config({ path: '.env.local' });
+import { Client } from '@hygraph/management-sdk';
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 
 const client = new Client({
   authToken: process.env.HYGRAPH_TOKEN,

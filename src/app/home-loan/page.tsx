@@ -49,7 +49,7 @@ export default function HomeLoanPage() {
                 We have direct relationships and pre-approved project status with the following financial institutions:
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: "16px", margin: "24px 0" }}>
-                {["State Bank of India", "HDFC Bank", "ICICI Bank", "Punjab National Bank", "LIC Housing Finance", "Canara Bank"].map((bank, idx) => (
+                {["State Bank of India", "HDFC Bank"].map((bank, idx) => (
                   <div key={idx} style={{ padding: "16px", background: "var(--bg-main)", border: "1px solid rgba(30, 34, 41, 0.05)", borderRadius: "4px", textAlign: "center", fontWeight: "600", fontSize: "14px", color: "var(--color-primary-dark)" }}>
                     {bank}
                   </div>

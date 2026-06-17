@@ -84,7 +84,7 @@ export default function HeroSlider({ slides: propSlides }: HeroSliderProps) {
           >
             <div className="slide-bg-overlay" />
               <Image
-                src={(slide.image as any)?.url || slide.image || "/logo.jpg"}
+                src={((slide.image as unknown) as { url?: string })?.url || slide.image || "/logo.jpg"}
                 alt={slide.title}
               fill
               priority={idx === 0}

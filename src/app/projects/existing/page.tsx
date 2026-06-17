@@ -40,11 +40,11 @@ export default async function ExistingProjectsPage() {
 
   // Filter dynamic projects by projectCategory === "ExistingProjects"
   const fetchedExistingProjects = dynamicProjects?.filter(
-    (p: any) => p.projectCategory === "ExistingProjects"
+    (p: { projectCategory: string }) => p.projectCategory === "ExistingProjects"
   ) || [];
 
   const projectsData = fetchedExistingProjects.length > 0
-    ? fetchedExistingProjects.map((p: any) => ({
+    ? fetchedExistingProjects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
         title: p.title,
         location: p.location,
         image: p.featuredImage?.url || "/placeholder-image.jpg",
@@ -67,7 +67,7 @@ export default async function ExistingProjectsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="projects-grid">
-            {projectsData.map((project: any, idx: number) => (
+            {projectsData.map((project: { title: string; location: string; image: string; badgeText: string; badgeColorClass: string; description: string; specs: { label: string; value: string }[]; detailsLink: string }, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={project.title}
