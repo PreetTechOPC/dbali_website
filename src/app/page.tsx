@@ -240,7 +240,7 @@ export default async function Home() {
                   </div>
                   <div className="contact-text">
                     <h4>Main Office Address</h4>
-                    <p>Ramnagar Road (NH 121), Kashipur, Udham Singh Nagar, Uttarakhand, India</p>
+                    <p>D.bali infrastructure & developers Pvt Ltd ramnagar road kashipur-244713</p>
                   </div>
                 </div>
 
