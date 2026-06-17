@@ -18,7 +18,7 @@ interface HeroSliderProps {
 export default function HeroSlider({ slides: propSlides }: HeroSliderProps) {
   const fallbackSlides: Slide[] = [
     {
-      image: "/palm_groove_villa.png",
+      image: "/palm_groove_gate.jpg",
       badge: "Flagship Residential Villas",
       title: "Dbali Palm Groove",
       description: "Exquisite 2 BHK luxury villas in Kashipur featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
@@ -32,7 +32,7 @@ export default function HeroSlider({ slides: propSlides }: HeroSliderProps) {
       link: "#projects",
     },
     {
-      image: "/rosedale_housing.png",
+      image: "/rosedale_gate.jpg",
       badge: "Premium Gated Society",
       title: "Dbali Rosedale Housing",
       description: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",

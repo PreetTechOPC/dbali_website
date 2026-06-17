@@ -12,61 +12,36 @@ export default async function Home() {
   const slides = await getHeroSlides();
   const featuredSection = await getHomeSection("featured-projects");
   const dynamicProjects = await getProjects();
-  const fallbackProjects = [
+  const fallbackProjects: any[] = [];
+
+  const filteredDynamicProjects = dynamicProjects?.filter(
+    (p: { projectCategory: string, title: string }) => p.projectCategory !== "PreviousProjects" && p.title !== "Dbali White House"
+  ) || [];
+
+  const hygraphMapped = filteredDynamicProjects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
+    title: p.title,
+    location: p.location,
+    image: p.featuredImage?.url || "/placeholder-image.jpg",
+    badgeText: p.projectStatus,
+    badgeColorClass: "teal",
+    description: p.shortDescription,
+    specs: [],
+    detailsLink: `/projects/${p.slug}`,
+  }));
+
+  const projectsData = [
     {
-      title: "Dbali Palm Groove",
-      location: "Kashipur, US Nagar",
-      image: "/palm_groove_villa.png",
-      badgeText: "Best Seller",
+      title: "White House Phase III",
+      location: "NH-121, Ramnagar Road, Kashipur",
+      image: "/white_house_phase_3_new.jpg",
+      badgeText: "Govt. Approved",
       badgeColorClass: "orange",
-      description: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
-      specs: [
-        { label: "Configuration", value: "2 BHK Villas" },
-        { label: "Possession", value: "Ready to Move" },
-      ],
-      detailsLink: "/projects/palm-groove",
-    },
-    {
-      title: "Dbali White House",
-      location: "Ramnagar Road / NH 121, Kashipur",
-      image: "/white_house.png",
-      badgeText: "Premium Luxury",
-      badgeColorClass: "blue",
-      description: "Sleek and spacious 2 & 3 BHK builder floors located directly on Ramnagar Road (NH 121). Offers elevator access, reserved car parking, and modern architectural details.",
-      specs: [
-        { label: "Configuration", value: "2 & 3 BHK Floors" },
-        { label: "Possession", value: "Under Const." },
-      ],
+      description: "Secure your future with premium Govt. Approved & Rera Certified residential plots in our highly anticipated Phase III development on Ramnagar Road. Limited availability.",
+      specs: [],
       detailsLink: "/projects/white-house",
     },
-    {
-      title: "Dbali Rosedale Housing",
-      location: "Kashipur, US Nagar",
-      image: "/rosedale_housing.png",
-      badgeText: "Gated Community",
-      badgeColorClass: "teal",
-      description: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",
-      specs: [
-        { label: "Configuration", value: "Villas & Plots" },
-        { label: "Road Width", value: "30 & 40 Feet" },
-        { label: "Possession", value: "Immediate" },
-      ],
-      detailsLink: "/projects/rosedale",
-    },
+    ...(hygraphMapped.length > 0 ? hygraphMapped : fallbackProjects)
   ];
-
-  const projectsData = dynamicProjects && dynamicProjects.length > 0 
-    ? dynamicProjects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
-        title: p.title,
-        location: p.location,
-        image: p.featuredImage?.url || "/placeholder-image.jpg",
-        badgeText: p.projectStatus,
-        badgeColorClass: "teal", // could map from status
-        description: p.shortDescription,
-        specs: [],
-        detailsLink: `/projects/${p.slug}`,
-      }))
-    : fallbackProjects;
 
   return (
     <>
@@ -107,24 +82,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Promotional Banner Section */}
-      <section className="section" style={{ paddingTop: "20px", paddingBottom: "60px", backgroundColor: "#f9f8f4" }}>
-        <div className="container">
-          <div className="section-header animate-fade-in-up" style={{ textAlign: "center", marginBottom: "30px" }}>
-            <h2 className="section-title">White House Phase III</h2>
-          </div>
-          <div className="banner-container" style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}>
-            <Image
-              src="/white-house-banner.jpg"
-              alt="White House Phase III Promotional Banner"
-              width={1200}
-              height={675}
-              sizes="(max-width: 1200px) 100vw, 1200px"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </div>
-        </div>
-      </section>
 
       {/* About Section */}
       <section className="section" id="about">

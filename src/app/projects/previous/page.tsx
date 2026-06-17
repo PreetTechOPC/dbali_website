@@ -10,28 +10,20 @@ export default async function PreviousProjectsPage() {
   
   const completedProjects = [
     {
-      name: "Dbali Green Meadows",
-      location: "Ramnagar Road, Kashipur",
-      year: "2018",
-      units: "45 Independent Villas",
-      desc: "Our first premium gated enclave featuring beautifully lined streets, water facilities, and customized duplex layouts.",
-      image: "/palm_groove_villa.png", // reusing architectural render for representation
+      name: "Dbali Palm Groove",
+      location: "Kashipur, US Nagar",
+      year: "2023",
+      units: "2 BHK Villas",
+      desc: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
+      image: "/palm_groove_gate.jpg",
     },
     {
-      name: "Dbali Residency Floors",
-      location: "Kashipur Bypass Road",
-      year: "2015",
-      units: "24 Builder Floors",
-      desc: "Spacious independent floors featuring high ceilings, modular layouts, and dedicated parking. Fully occupied.",
-      image: "/white_house.png",
-    },
-    {
-      name: "Dbali Enclave",
-      location: "Jaspur Road, Kashipur",
-      year: "2011",
-      units: "60 Residential Plots & Duplexes",
-      desc: "A fully integrated residential colony featuring decorative street lamps, park access, and wide security corridors.",
-      image: "/rosedale_housing.png",
+      name: "Dbali Rosedale Housing",
+      location: "Kashipur, US Nagar",
+      year: "2021",
+      units: "Villas & Plots",
+      desc: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",
+      image: "/rosedale_gate.jpg",
     },
   ];
 
@@ -40,16 +32,19 @@ export default async function PreviousProjectsPage() {
     (p: { projectCategory: string }) => p.projectCategory === "PreviousProjects"
   ) || [];
 
-  const projectsData = fetchedPreviousProjects.length > 0
-    ? fetchedPreviousProjects.map((p: { title: string; location: string; projectStatus: string; shortDescription: string; overview?: { html: string }; featuredImage?: { url: string } }) => ({
-        name: p.title,
-        location: p.location,
-        year: p.projectStatus || "Completed",
-        units: p.shortDescription || "Residential Project",
-        desc: p.overview?.html ? p.overview.html.replace(/<[^>]*>?/gm, '').substring(0, 150) + "..." : p.shortDescription,
-        image: p.featuredImage?.url || "/placeholder-image.jpg",
-      }))
-    : completedProjects;
+  const hygraphMapped = fetchedPreviousProjects.map((p: { title: string; location: string; projectStatus: string; shortDescription: string; overview?: { html: string }; featuredImage?: { url: string } }) => ({
+    name: p.title,
+    location: p.location,
+    year: p.projectStatus || "Completed",
+    units: p.shortDescription || "Residential Project",
+    desc: p.overview?.html ? p.overview.html.replace(/<[^>]*>?/gm, '').substring(0, 150) + "..." : p.shortDescription,
+    image: p.featuredImage?.url || "/placeholder-image.jpg",
+  }));
+
+  const projectsData = [
+    ...hygraphMapped,
+    ...completedProjects
+  ];
 
   return (
     <>
@@ -65,9 +60,6 @@ export default async function PreviousProjectsPage() {
             {projectsData.map((project: { name: string; location: string; year: string; units: string; desc: string; image: string }, idx: number) => (
               <div className="project-card" key={idx} style={{ opacity: 0.9 }}>
                 <div className="project-image-wrapper">
-                  <span className="project-badge project-badge-teal" style={{ background: "#5e6675" }}>
-                    {project.year.includes("Completed") ? project.year : `Completed ${project.year}`}
-                  </span>
                   <Image
                     src={project.image}
                     alt={project.name}

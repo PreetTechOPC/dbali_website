@@ -16,7 +16,7 @@ export default async function LatestNewsPage() {
       title: "Rosedale Housing Society Gated Development Complete",
       date: "May 24, 2026",
       desc: "We are pleased to announce the completion of the asphalt roads, electrical grids, and perimeter gates at Dbali Rosedale. Site visits are now active.",
-      image: "/rosedale_housing.png",
+      image: "/rosedale_gate.jpg",
       slug: "rosedale-development-complete",
     },
     {
@@ -30,7 +30,7 @@ export default async function LatestNewsPage() {
       title: "1,200 Families Milestone: Earning Customer Trust in US Nagar",
       date: "February 18, 2026",
       desc: "Dbali reaches a major milestone of delivering keys to over 1,200 local families since our foundation in 2007. We thank our homebuyers for their trust.",
-      image: "/palm_groove_villa.png",
+      image: "/palm_groove_gate.jpg",
       slug: "twelve-hundred-families-milestone",
     },
   ];

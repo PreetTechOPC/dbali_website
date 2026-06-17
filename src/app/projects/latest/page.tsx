@@ -10,16 +10,32 @@ export default async function LatestProjectsPage() {
   const projects = await getProjects();
 
   // Transform Hygraph data to match ProjectCard props
-  const latestProjects = projects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
-    title: p.title,
-    location: p.location,
-    image: p.featuredImage?.url || "/placeholder-image.jpg",
-    badgeText: p.projectStatus,
-    badgeColorClass: "teal", // default; adjust mapping if needed
-    description: p.shortDescription,
-    specs: [], // Add any spec mapping if your schema provides it
-    detailsLink: `/projects/${p.slug}`,
-  }));
+  const hygraphProjects = projects
+    .filter((p: { projectCategory: string }) => p.projectCategory !== "PreviousProjects")
+    .map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
+      title: p.title,
+      location: p.location,
+      image: p.featuredImage?.url || "/placeholder-image.jpg",
+      badgeText: p.projectStatus,
+      badgeColorClass: "teal", // default; adjust mapping if needed
+      description: p.shortDescription,
+      specs: [], // Add any spec mapping if your schema provides it
+      detailsLink: `/projects/${p.slug}`,
+    }));
+
+  const latestProjects = [
+    {
+      title: "White House Phase III",
+      location: "NH-121, Ramnagar Road, Kashipur",
+      image: "/white_house_phase_3_new.jpg",
+      badgeText: "Govt. Approved",
+      badgeColorClass: "orange",
+      description: "Secure your future with premium Govt. Approved & Rera Certified residential plots in our highly anticipated Phase III development on Ramnagar Road. Limited availability.",
+      specs: [],
+      detailsLink: "/projects/white-house",
+    },
+    ...hygraphProjects
+  ];
 
   return (
     <>

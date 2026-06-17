@@ -59,7 +59,7 @@ export default function PalmGrooveDetailsPage() {
           {/* Main Visual Showcase */}
           <div className="project-showcase-banner">
             <Image
-              src="/palm_groove_villa.png"
+              src="/palm_groove_gate.jpg"
               alt="Dbali Palm Groove Villas Render"
               fill
               priority

@@ -13,7 +13,7 @@ export default function WhiteHouseDetailsPage() {
     { label: "Floor Sizes", value: "2 & 3 BHK Builder Floors" },
 
     { label: "Possession Status", value: "Under Construction (Phase I Delivery Soon)" },
-    { label: "Location", value: "Ramnagar Road (NH 121), Kashipur" },
+    { label: "Location", value: "Nijhara, Kashipur in the Udham Singh Nagar district of Uttarakhand" },
     { label: "Features", value: "Elevator access & reserved stilt parking" },
     { label: "Approved By", value: "RERA Registered & major banks approved" },
   ];
@@ -68,7 +68,7 @@ export default function WhiteHouseDetailsPage() {
             <div className="project-showcase-info">
               <div className="project-badge project-badge-blue" style={{ marginBottom: "12px", display: "inline-block" }}>Selling Fast</div>
               <h2>Dbali White House</h2>
-              <p>Directly on Ramnagar Road (NH 121)</p>
+              <p>Nijhara, Kashipur in the Udham Singh Nagar district of Uttarakhand</p>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ export default function WhiteHouseDetailsPage() {
             <div className="content-body">
               <h3>Project Overview</h3>
               <p>
-                Dbali White House represents our premium class of builder floors, offering independent access, luxury floor plates, and prime location connectivity. Positioned directly on Ramnagar Road (NH 121), the property features instant connectivity to local schools, hospitals, and transit points. Each floor boasts spacious front-facing balconies, utility shafts, and high-quality modular fittings.
+                Dbali White House represents our premium class of builder floors, offering independent access, luxury floor plates, and prime location connectivity. Positioned directly in Nijhara, Kashipur in the Udham Singh Nagar district of Uttarakhand, the property features instant connectivity to local schools, hospitals, and transit points. Each floor boasts spacious front-facing balconies, utility shafts, and high-quality modular fittings.
               </p>
 
               <h3 style={{ marginTop: "40px" }}>Technical Specifications</h3>

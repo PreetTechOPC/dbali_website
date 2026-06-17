@@ -8,35 +8,7 @@ import { getProjects } from "@/lib/hygraph";
 export default async function ExistingProjectsPage() {
   const dynamicProjects = await getProjects();
   
-  const existingProjects = [
-    {
-      title: "Dbali Rosedale Housing",
-      location: "Kashipur, US Nagar",
-      image: "/rosedale_housing.png",
-      badgeText: "Active Gated Society",
-      badgeColorClass: "teal",
-      description: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",
-      specs: [
-        { label: "Configuration", value: "Villas & Plots" },
-        { label: "Road Width", value: "30 & 40 Feet" },
-        { label: "Possession", value: "Immediate" },
-      ],
-      detailsLink: "/projects/rosedale"
-    },
-    {
-      title: "Dbali Palm Groove",
-      location: "Kashipur, US Nagar",
-      image: "/palm_groove_villa.png",
-      badgeText: "Ready to Move",
-      badgeColorClass: "orange",
-      description: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
-      specs: [
-        { label: "Configuration", value: "2 BHK Villas" },
-        { label: "Possession", value: "Ready to Move" },
-      ],
-      detailsLink: "/projects/palm-groove"
-    },
-  ];
+  const existingProjects: { title: string; location: string; image: string; badgeText: string; badgeColorClass: string; description: string; specs: { label: string; value: string }[]; detailsLink: string }[] = [];
 
   // Filter dynamic projects by projectCategory === "ExistingProjects"
   const fetchedExistingProjects = dynamicProjects?.filter(

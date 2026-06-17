@@ -59,7 +59,7 @@ export default function RosedaleDetailsPage() {
           {/* Main Visual Showcase */}
           <div className="project-showcase-banner">
             <Image
-              src="/rosedale_housing.png"
+              src="/rosedale_gate.jpg"
               alt="Dbali Rosedale Housing Render"
               fill
               priority
