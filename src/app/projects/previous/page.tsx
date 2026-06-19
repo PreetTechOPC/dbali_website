@@ -11,25 +11,41 @@ export default async function PreviousProjectsPage() {
   const completedProjects = [
     {
       name: "Dbali Palm Groove",
-      location: "Kashipur, US Nagar",
+      location: "Kundeshwari, Jaitpur Ghosi, Kashipur, Udham Singh Nagar, Uttarakhand",
       year: "2023",
-      units: "2 BHK Villas",
-      desc: "Exquisite 2 BHK villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
+      units: "Villas",
+      desc: "Exquisite villas featuring modular kitchens, high-quality fittings, and beautifully landscaped front gardens. Designed for luxury and comfortable family living.",
       image: "/palm_groove_gate.jpg",
     },
     {
       name: "Dbali Rosedale Housing",
-      location: "Kashipur, US Nagar",
+      location: "Aliganj Rd, Kashipur, Uttarakhand",
       year: "2021",
       units: "Villas & Plots",
       desc: "A secure, premium residential community in Kashipur featuring wide asphalt roads, decorative street lamps, high security, and landscaped shared green parks.",
       image: "/rosedale_gate.jpg",
     },
+    {
+      name: "Dbali Paradise",
+      location: "Aliganj Road, Kashipur, Ginni Khera, Uttarakhand",
+      year: "2022",
+      units: "Villas with Pool",
+      desc: "A stunning residential layout featuring beautifully designed villas surrounding a central landscaped park and swimming pool, offering a resort-like living experience.",
+      image: "/project_gallery_1.jpg",
+    },
+    {
+      name: "Apna Ghar",
+      location: "Kashipur, Uttarakhand",
+      year: "2020",
+      units: "Residential Housing",
+      desc: "A beautifully crafted residential community designed to provide comfortable, modern living spaces for families.",
+      image: "/project_gallery_14.jpg",
+    },
   ];
 
   // Filter dynamic projects by projectCategory === "PreviousProjects"
   const fetchedPreviousProjects = dynamicProjects?.filter(
-    (p: { projectCategory: string }) => p.projectCategory === "PreviousProjects"
+    (p: { projectCategory: string; title: string }) => p.projectCategory === "PreviousProjects" && p.title !== "Dbali White House"
   ) || [];
 
   const hygraphMapped = fetchedPreviousProjects.map((p: { title: string; location: string; projectStatus: string; shortDescription: string; overview?: { html: string }; featuredImage?: { url: string } }) => ({
