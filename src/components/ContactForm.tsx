@@ -21,25 +21,45 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call to send email/save leads
-    setTimeout(() => {
+    const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+
+    if (!scriptUrl) {
+      console.warn("Google Sheet URL not configured. Simulating success.");
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", phone: "", project: "", message: "" });
+        setTimeout(() => setIsSuccess(false), 5000);
+      }, 1500);
+      return;
+    }
+
+    try {
+      const response = await fetch(scriptUrl, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        // no-cors is often required when talking to Google Apps Script from a browser
+        mode: "no-cors", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Since mode is no-cors, we won't get a readable response back, but if it doesn't throw, it succeeded
       setIsSubmitting(false);
       setIsSuccess(true);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        project: "",
-        message: "",
-      });
+      setFormData({ name: "", email: "", phone: "", project: "", message: "" });
       
-      // Reset success message after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    } catch (error) {
+      console.error("Error submitting form", error);
+      setIsSubmitting(false);
+      alert("There was an error submitting your form. Please try again.");
+    }
   };
 
   return (

@@ -129,7 +129,7 @@ export default async function PhotoGalleryPage() {
               <div className="gallery-card" key={idx}>
                 <Image
                   src={photo.image}
-                  alt={photo.title}
+                  alt={photo.title || "Gallery Image"}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="gallery-card-img"

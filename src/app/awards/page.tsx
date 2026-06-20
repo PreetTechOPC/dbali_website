@@ -7,33 +7,6 @@ import Image from "next/image";
 
 export default async function AwardsPage() {
   const dynamicAwards = await getAwards();
-  const fallbackAchievements = [
-    {
-      title: "19+ Years of Real Estate Excellence",
-      organization: "Kashipur Property Council",
-      year: "2026",
-      desc: "Recognizing outstanding contribution to residential infrastructure and quality home construction in Uttarakhand.",
-    },
-    {
-      title: "Timely Delivery Certification",
-      organization: "Udham Singh Nagar Developers Forum",
-      year: "2023",
-      desc: "Awarded for maintain a 100% on-time project completion and client handover record for three consecutive years.",
-    },
-    {
-      title: "ISO 9001:2015 Compliance (Quality)",
-      organization: "Quality Control Audits",
-      year: "2020",
-      desc: "Certification for executing detailed vendor surveillance and engineering project management protocols.",
-    },
-    {
-      title: "Best Residential Villa Layout Design",
-      organization: "Regional Architectural Association",
-      year: "2019",
-      desc: "Honored for the space utilization, lighting, and air flow layout integrated into Dbali Palm Groove.",
-    },
-  ];
-
   const achievements = dynamicAwards && dynamicAwards.length > 0 
     ? dynamicAwards.map((a: { title: string; year: string; description: string; image?: { url: string } }) => ({
         title: a.title,
@@ -42,7 +15,7 @@ export default async function AwardsPage() {
         desc: a.description,
         image: a.image?.url || null
       }))
-    : fallbackAchievements;
+    : [];
 
   return (
     <>

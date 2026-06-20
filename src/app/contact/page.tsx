@@ -76,19 +76,17 @@ export default function ContactUsPage() {
             </div>
           </div>
 
-          {/* Interactive Google Map Embed Mock */}
+          {/* Interactive Google Map Embed */}
           <div style={{ marginTop: "60px", height: "400px", position: "relative", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(30, 34, 41, 0.08)" }}>
-            <div style={{ position: "absolute", inset: 0, backgroundColor: "#e8e6e0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", textAlign: "center" }}>
-              <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" width="48" height="48" style={{ color: "var(--color-orange)", marginBottom: "12px" }}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25gC4.5 6.63 7.858 3.5 12 3.5s7.5 3.13 7.5 7.00z" />
-              </svg>
-              <h4 style={{ fontSize: "18px", color: "var(--color-primary-dark)", margin: "0 0 4px 0" }}>Dbali Office Location - Ramnagar Road</h4>
-              <p style={{ fontSize: "14px", color: "var(--text-muted)", margin: "0 0 16px 0", maxWidth: "400px" }}>NH 121, near Kashipur Junction, Udham Singh Nagar, Uttarakhand, India</p>
-              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm-nav">
-                Open in Google Maps
-              </a>
-            </div>
+            <iframe 
+              src="https://maps.google.com/maps?q=D.bali%20infrastructure%20%26%20developers%20Pvt%20Ltd%20ramnagar%20road%20kashipur-244713&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </section>

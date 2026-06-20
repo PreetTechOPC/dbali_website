@@ -12,10 +12,10 @@ export default async function Home() {
   const slides = await getHeroSlides();
   const featuredSection = await getHomeSection("featured-projects");
   const dynamicProjects = await getProjects();
-  const fallbackProjects: any[] = [];
+  const fallbackProjects: { title: string; location: string; image: string; badgeText: string; badgeColorClass: string; description: string; specs: never[]; detailsLink: string }[] = [];
 
   const filteredDynamicProjects = dynamicProjects?.filter(
-    (p: { projectCategory: string, title: string }) => p.projectCategory !== "PreviousProjects" && p.title !== "Dbali White House"
+    (p: { projectCategory: string, title: string }) => p.projectCategory !== "PreviousProjects"
   ) || [];
 
   const hygraphMapped = filteredDynamicProjects.map((p: { title: string; location: string; featuredImage?: { url: string }; projectStatus: string; shortDescription: string; slug: string }) => ({
@@ -33,7 +33,7 @@ export default async function Home() {
     {
       title: "White House Phase III",
       location: "NH-121, Ramnagar Road, Kashipur",
-      image: "/white_house_phase_3_new.jpg",
+      image: "/WhatsApp Image 2026-06-16 at 11.34.58 AM (1).jpeg",
       badgeText: "Govt. Approved",
       badgeColorClass: "orange",
       description: "Secure your future with premium Govt. Approved & Rera Certified residential plots in our highly anticipated Phase III development on Ramnagar Road. Limited availability.",

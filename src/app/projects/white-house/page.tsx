@@ -9,14 +9,6 @@ import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 
 export default function WhiteHouseDetailsPage() {
-  const specs = [
-    { label: "Floor Sizes", value: "2 & 3 BHK Builder Floors" },
-
-    { label: "Possession Status", value: "Under Construction (Phase I Delivery Soon)" },
-    { label: "Location", value: "Nijhara, Kashipur in the Udham Singh Nagar district of Uttarakhand" },
-    { label: "Features", value: "Elevator access & reserved stilt parking" },
-    { label: "Approved By", value: "RERA Registered & major banks approved" },
-  ];
 
   const details = [
     {
@@ -59,7 +51,7 @@ export default function WhiteHouseDetailsPage() {
           {/* Main Visual Showcase */}
           <div className="project-showcase-banner">
             <Image
-              src="/white_house.png"
+              src="/WhatsApp Image 2026-06-16 at 11.34.58 AM.jpeg"
               alt="Dbali White House Render"
               fill
               priority
@@ -110,16 +102,6 @@ export default function WhiteHouseDetailsPage() {
 
             {/* Right Column: Enquiry Form & Quick Stats */}
             <div className="sidebar-box">
-              <h3 style={{ fontSize: "18px", marginBottom: "16px", color: "var(--color-primary-dark)" }}>Quick Overview</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "30px" }}>
-                {specs.map((spec, idx) => (
-                  <div key={idx} className="project-stat-row">
-                    <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>{spec.label}</span>
-                    <strong style={{ fontSize: "13px", color: "var(--color-primary-dark)", textAlign: "right" }}>{spec.value}</strong>
-                  </div>
-                ))}
-              </div>
-
               <h3 style={{ fontSize: "18px", marginBottom: "16px", color: "var(--color-primary-dark)" }}>Schedule a Site Visit</h3>
               <ContactForm />
 

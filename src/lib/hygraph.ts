@@ -24,8 +24,8 @@ export async function fetchAPI(query: string, variables = {}) {
         query,
         variables,
       }),
-      // Revalidate content every 60 seconds (or 0 to disable caching during dev)
-      next: { revalidate: 60 },
+      // Disable caching to see real-time updates from Hygraph
+      next: { revalidate: 0 },
     });
 
     const json = await res.json();
@@ -98,6 +98,9 @@ export async function getNewsArticles() {
         slug
         date
         excerpt
+        content {
+          html
+        }
         featuredImage {
           url
         }
@@ -157,7 +160,6 @@ export async function getProject(slug: string) {
         overview { html }
         technicalSpecifications { html }
         amenities { html }
-        quickOverview { html }
         content { html }
       }
     }

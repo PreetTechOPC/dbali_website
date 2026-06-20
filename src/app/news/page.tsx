@@ -19,13 +19,7 @@ export default async function LatestNewsPage() {
       image: "/rosedale_gate.jpg",
       slug: "rosedale-development-complete",
     },
-    {
-      title: "Dbali Infrastructures Announces Pre-launch of White House Phase II",
-      date: "April 12, 2026",
-      desc: "Following high demand for Phase I, we are opening pre-bookings for Dbali White House Phase II on Ramnagar Road (NH 121) with special introductory offers.",
-      image: "/white_house.png",
-      slug: "white-house-phase-two",
-    },
+
     {
       title: "1,200 Families Milestone: Earning Customer Trust in US Nagar",
       date: "February 18, 2026",
@@ -47,7 +41,9 @@ export default async function LatestNewsPage() {
       <section className="inner-page-section">
         <div className="container">
           <div className="news-grid">
-            {articles.map((item: { title: string; date: string; desc?: string; excerpt?: string; image?: string; featuredImage?: { url: string }; slug: string }, idx: number) => (
+            {articles.map((item: { title: string; date: string; desc?: string; excerpt?: string; content?: { html: string }; image?: string; featuredImage?: { url: string }; slug: string }, idx: number) => {
+              const strippedContent = item.content?.html ? item.content.html.replace(/<[^>]*>?/gm, '') : '';
+              return (
               <div className="news-card" key={idx}>
                 <div className="news-card-img-wrapper">
                   <Image
@@ -59,18 +55,11 @@ export default async function LatestNewsPage() {
                   />
                 </div>
                 <div className="news-card-content">
-                  <div className="news-card-date">{item.date}</div>
                   <h4 className="news-card-title">{item.title}</h4>
-                  <p className="news-card-desc">{item.excerpt || item.desc}</p>
-                  <Link href={`/news/${item.slug}`} className="news-card-link">
-                    Read More 
-                    <svg fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="14" height="14">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
-                  </Link>
+                  <p className="news-card-desc">{item.excerpt || item.desc || strippedContent}</p>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>
