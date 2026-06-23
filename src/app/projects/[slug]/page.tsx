@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import ImageGallery from "@/components/ImageGallery";
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -60,6 +61,21 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 </>
               )}
 
+              {project.mapImage && (
+                <div style={{ marginTop: "40px", marginBottom: "20px" }}>
+                  <h3 style={{ marginBottom: "16px" }}>Location Map</h3>
+                  <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(30, 34, 41, 0.1)", boxShadow: "0 4px 15px rgba(0,0,0,0.05)" }}>
+                    <Image 
+                      src={project.mapImage.url} 
+                      alt={`${project.title} Location Map`} 
+                      width={800} 
+                      height={400} 
+                      style={{ width: "100%", height: "auto", display: "block", objectFit: "cover", maxHeight: "400px" }} 
+                    />
+                  </div>
+                </div>
+              )}
+
               {project.technicalSpecifications?.html && (
                 <div style={{ marginTop: "3rem" }}>
                   <h2>Technical Specifications</h2>
@@ -111,13 +127,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           {project.gallery && project.gallery.length > 0 && (
             <div style={{ marginTop: "4rem" }}>
               <h2>Project Gallery</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginTop: "20px" }}>
-                {project.gallery.map((img: { url: string }, idx: number) => (
-                  <div key={idx} style={{ position: "relative", height: "250px", borderRadius: "8px", overflow: "hidden" }}>
-                    <Image src={img.url} alt={`${project.title} gallery ${idx + 1}`} fill style={{ objectFit: "cover" }} />
-                  </div>
-                ))}
-              </div>
+              <ImageGallery images={project.gallery} />
             </div>
           )}
         </div>

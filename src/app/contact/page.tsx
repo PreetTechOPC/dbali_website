@@ -60,8 +60,8 @@ export default function ContactUsPage() {
                   </div>
                   <div className="contact-text">
                     <h4>Department Contacts</h4>
-                    <p style={{ margin: "0 0 4px 0" }}><strong>Sales:</strong> +91 90121 38044, +91 8077 634 229</p>
-                    <p style={{ margin: "0 0 4px 0" }}><strong>Accounts:</strong> +91 5947 275000</p>
+                    <p style={{ margin: "0 0 4px 0" }}><strong>WhatsApp Enquire:</strong> +91 90121 38044</p>
+                    <p style={{ margin: "0 0 4px 0" }}><strong>Call:</strong> 8630835635</p>
                     <p style={{ margin: "0" }}><strong>General:</strong> d.bali@dbali.in</p>
                   </div>
                 </div>

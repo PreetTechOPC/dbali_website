@@ -33,6 +33,8 @@ export const metadata: Metadata = {
   },
 };
 
+import PopupInquiry from "@/components/PopupInquiry";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,7 +42,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable}`} suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        <PopupInquiry />
+      </body>
     </html>
   );
 }

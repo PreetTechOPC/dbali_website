@@ -23,19 +23,7 @@ export default async function LatestProjectsPage() {
       detailsLink: `/projects/${p.slug}`,
     }));
 
-  const latestProjects = [
-    {
-      title: "White House Phase III",
-      location: "NH-121, Ramnagar Road, Kashipur",
-      image: "/WhatsApp Image 2026-06-16 at 11.34.58 AM (1).jpeg",
-      badgeText: "Govt. Approved",
-      badgeColorClass: "orange",
-      description: "Secure your future with premium Govt. Approved & Rera Certified residential plots in our highly anticipated Phase III development on Ramnagar Road. Limited availability.",
-      specs: [],
-      detailsLink: "/projects/white-house",
-    },
-    ...hygraphProjects
-  ];
+  const latestProjects = [...hygraphProjects];
 
   return (
     <>

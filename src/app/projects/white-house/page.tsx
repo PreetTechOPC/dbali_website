@@ -1,14 +1,32 @@
 // E:\Dbali website\src\app\projects\white-house\page.tsx
 "use client";
 
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import ImageGallery from "@/components/ImageGallery";
+import { getProject } from "@/lib/hygraph";
 
 export default function WhiteHouseDetailsPage() {
+  const [galleryImages, setGalleryImages] = useState<{url: string}[]>([]);
+  const [mapImageUrl, setMapImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchProjectData() {
+      const data = await getProject("white-house-phase-3");
+      if (data?.gallery) {
+        setGalleryImages(data.gallery);
+      }
+      if (data?.mapImage?.url) {
+        setMapImageUrl(data.mapImage.url);
+      }
+    }
+    fetchProjectData();
+  }, []);
 
   const details = [
     {
@@ -42,7 +60,6 @@ export default function WhiteHouseDetailsPage() {
       <Navbar />
       <PageHeader
         title="Dbali White House Floors"
-        subtitle="Premium 2 & 3 BHK builder floors featuring modern elevator comforts and premium finishes."
         breadcrumbs={[{ label: "Projects" }, { label: "Latest" }, { label: "White House" }]}
       />
       
@@ -72,6 +89,24 @@ export default function WhiteHouseDetailsPage() {
                 Dbali White House represents our premium class of builder floors, offering independent access, luxury floor plates, and prime location connectivity. Positioned directly in Nijhara, Kashipur in the Udham Singh Nagar district of Uttarakhand, the property features instant connectivity to local schools, hospitals, and transit points. Each floor boasts spacious front-facing balconies, utility shafts, and high-quality modular fittings.
               </p>
 
+              <div style={{ marginTop: "40px", marginBottom: "20px" }}>
+                <h3 style={{ marginBottom: "16px" }}>Location Map</h3>
+                <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(30, 34, 41, 0.1)", boxShadow: "0 4px 15px rgba(0,0,0,0.05)" }}>
+                  <Image 
+                    src={mapImageUrl || "/project_gallery_4.jpg"} 
+                    alt="Project Location Map" 
+                    width={800} 
+                    height={400} 
+                    style={{ width: "100%", height: "auto", display: "block", objectFit: "cover", maxHeight: "400px" }} 
+                  />
+                </div>
+                {!mapImageUrl && (
+                  <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "8px", textAlign: "center" }}>
+                    *Placeholder image shown. Add &apos;mapImage&apos; field in Hygraph to upload a custom map.
+                  </p>
+                )}
+              </div>
+
               <h3 style={{ marginTop: "40px" }}>Technical Specifications</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "24px", margin: "20px 0" }}>
                 {details.map((section, idx) => (
@@ -98,6 +133,13 @@ export default function WhiteHouseDetailsPage() {
                   <strong>Rainwater Harvesting:</strong> Engineered underground conservation pits designed to maintain the local water table.
                 </li>
               </ul>
+
+              {galleryImages.length > 0 && (
+                <>
+                  <h3 style={{ marginTop: "40px" }}>Project Gallery</h3>
+                  <ImageGallery images={galleryImages} />
+                </>
+              )}
             </div>
 
             {/* Right Column: Enquiry Form & Quick Stats */}

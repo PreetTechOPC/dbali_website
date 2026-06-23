@@ -158,9 +158,11 @@ export async function getProject(slug: string) {
         shortDescription
         featuredImage { url }
         overview { html }
+        mapImage { url }
         technicalSpecifications { html }
         amenities { html }
         content { html }
+        gallery { url }
       }
     }
   `, { slug });

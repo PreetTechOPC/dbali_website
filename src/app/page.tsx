@@ -29,19 +29,7 @@ export default async function Home() {
     detailsLink: `/projects/${p.slug}`,
   }));
 
-  const projectsData = [
-    {
-      title: "White House Phase III",
-      location: "NH-121, Ramnagar Road, Kashipur",
-      image: "/WhatsApp Image 2026-06-16 at 11.34.58 AM (1).jpeg",
-      badgeText: "Govt. Approved",
-      badgeColorClass: "orange",
-      description: "Secure your future with premium Govt. Approved & Rera Certified residential plots in our highly anticipated Phase III development on Ramnagar Road. Limited availability.",
-      specs: [],
-      detailsLink: "/projects/white-house",
-    },
-    ...(hygraphMapped.length > 0 ? hygraphMapped : fallbackProjects)
-  ];
+  const projectsData = [...(hygraphMapped.length > 0 ? hygraphMapped : fallbackProjects)];
 
   return (
     <>
@@ -209,7 +197,7 @@ export default async function Home() {
                   </div>
                   <div className="contact-text">
                     <h4>Sales Helpline</h4>
-                    <p>+91 90121 38044, +91 8077 634 229</p>
+                    <p><strong>WhatsApp Enquire:</strong> +91 90121 38044<br /><strong>Call:</strong> 8630835635</p>
                   </div>
                 </div>
 
